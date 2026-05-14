@@ -965,18 +965,21 @@ html, body { height: 100vh; overflow: hidden; }
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.topbar > .cbtn .cbadge {
-  background: #000;
-  color: var(--g);
+@keyframes cart-hue-shift {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+.topbar > .cbtn .cart-num {
+  color: #00cc00;
   font-weight: 900;
-  margin-left: 6px;
-  padding: 1px 7px;
-  border-radius: 10px;
-  min-width: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  animation: cart-hue-shift 3s linear infinite;
+  white-space: nowrap;
+}
+.topbar > .cbtn .cart-sep {
+  color: #000;
+  opacity: 0.4;
+  margin: 0 .15em;
+  font-weight: 400;
 }
 
 
@@ -1192,7 +1195,7 @@ ol.rc-list li::before {
     <div class="tab g" onclick="go('faqs',this,true)" role="link" tabindex="0">FAQs</div>
     <div class="tab" onclick="go('contact',this,false)" role="link" tabindex="0">Contact</div>
   </nav>
-  <button class="cbtn" onclick="openCart()" aria-label="Open cart">Cart <span class="cbadge" id="cb-main">0</span></button>
+  <button class="cbtn" onclick="openCart()" aria-label="Open cart"><span class="cart-num" id="cb-count">0</span><span class="cart-sep">│</span><span class="cart-num" id="cb-total">$0</span></button>
 </header>
 <div class="scroll" id="scroll" role="main" aria-label="Site content">
 
@@ -1552,7 +1555,7 @@ function tot(){return cart.reduce(function(s,i){return s+i.price*i.qty;},0);}
 function cnt(){return cart.reduce(function(s,i){return s+i.qty;},0);}
 function renderCart(){
   var n=cnt();
-  document.querySelectorAll('.cbadge').forEach(function(b){b.textContent=n;b.style.display=n>0?'flex':'none';});
+  document.querySelectorAll('.cbadge').forEach(function(b){b.textContent=n;b.style.display=n>0?'flex':'none';});var ce=document.getElementById('cb-count');if(ce)ce.textContent=n;var te=document.getElementById('cb-total');if(te)te.textContent='$'+tot().toFixed(0);
   var el=document.getElementById('citems');
   if(!cart.length){el.innerHTML='<div class="cem"><p>Your cart is empty.</p></div>';}
   else{el.innerHTML=cart.map(function(i){return'<div class="cit"><div class="citim" aria-hidden="true">'+i.icon+'</div><div><div class="citn">'+i.name+'</div><div class="cits">'+i.size+'</div><div class="citc"><button class="qb" onclick="sq(\''+i.id+'\','+(i.qty-1)+')" aria-label="Decrease quantity of '+i.name+'">−</button><span class="qv" aria-label="Quantity: '+i.qty+'">'+i.qty+'</span><button class="qb" onclick="sq(\''+i.id+'\','+(i.qty+1)+')" aria-label="Increase quantity of '+i.name+'">+</button><span class="rm" onclick="rem(\''+i.id+'\')" role="button" tabindex="0" aria-label="Remove '+i.name+' from cart">Remove</span></div></div><div class="cip">$'+(i.price*i.qty).toFixed(2)+'</div></div>';}).join('');}
