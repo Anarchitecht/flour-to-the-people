@@ -770,8 +770,9 @@ html, body { height: 100vh; overflow: hidden; }
 .filters .fb:nth-child(5) { --tc: oklch(0.70 0.16 245); }  /* Mixes — blue */
 
 .filters .fb {
-  font-size: 17px !important;
-  padding: 10px 20px !important;
+  font-size: max(14px, min(4vh, 2.8vw)) !important;
+  padding: 0 .6em !important;
+  line-height: 1.2 !important;
   color: #0A0A0A !important;
   background: var(--tc) !important;
   border: 1.5px solid var(--tc) !important;
@@ -852,14 +853,13 @@ html, body { height: 100vh; overflow: hidden; }
 }
 .topbar-nav .tab {
   flex: 1;
-  container-type: size;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   line-height: 1 !important;
-  font-size: max(14px, min(80cqh, 18cqw)) !important;
-  padding: 0 .4em !important;
+  font-size: max(14px, min(4vh, 2.8vw)) !important;
+  padding: 0 .5em !important;
   letter-spacing: .02em !important;
   min-height: 0 !important;
   border: 1.5px solid #2a2a2a !important;
