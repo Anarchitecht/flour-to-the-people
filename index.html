@@ -146,8 +146,7 @@ p + p { margin-top: 0.8em; }
 /* Location name bold labels */
 .ln { font-size: 16px; }
 
-/* Tab labels — UI, 12px floor OK (not reading text) */
-.tab { font-size: 12px; }
+/* Tab labels — font scales to fill tab via container queries (rule below) */
 
 /* Footer addresses */
 .fc address, .fc a { font-size: 13px !important; }
@@ -186,13 +185,13 @@ input,textarea,select{font:inherit}
 }
 body{background:var(--k);color:var(--w);font-family:var(--fb);overflow:hidden;height:100vh;}
 .shell{width:100%;height:100vh;display:flex;flex-direction:column;position:relative;}
-.tabs{display:flex;background:#000;border-bottom:3px solid var(--r);padding:0 8px;gap:1px;height:36px;flex-shrink:0;align-items:flex-end;transition:border-color .2s;}
-.tab{padding:6px 11px;font-family:var(--fc);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;cursor:pointer;transition:all .15s;border-radius:2px 2px 0 0;}
+.tabs{display:flex;background:#000;border-bottom:3px solid var(--r);padding:0 8px;gap:1px;height:clamp(36px,4.5vh,52px);flex-shrink:0;align-items:stretch;transition:border-color .2s;}
+.tab{display:flex;align-items:center;line-height:1;padding:0 .6em;font-family:var(--fc);font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;cursor:pointer;transition:all .15s;border-radius:2px 2px 0 0;}
 .tab.on{color:#fff;background:var(--r);}
 .tab.g.on{background:var(--g);}
 .tab:hover:not(.on){color:var(--w);}
 .scroll{flex:1;overflow-y:auto;overflow-x:hidden;}
-.pg{display:none;}.pg.on{display:block;}
+.pg{display:none;max-width:1100px;margin:0 auto;width:100%;}.pg.on{display:block;}
 
 /* COMPONENTS */
 .nav{background:#000;padding:0 18px;height:50px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--ac);position:sticky;top:0;z-index:50;}
@@ -764,15 +763,17 @@ html, body { height: 100vh; overflow: hidden; }
 
 /* ── FILTER TABS — rainbow at equal OKLCH luminance, 1px glow ── */
 .filters { gap: 8px !important; margin-bottom: 20px !important; }
-.filters .fb:nth-child(1) { --tc: oklch(0.72 0.18 28); }   /* All — red */
-.filters .fb:nth-child(2) { --tc: oklch(0.74 0.17 60); }   /* Bread — orange */
-.filters .fb:nth-child(3) { --tc: oklch(0.82 0.16 95); }   /* Ancient — yellow */
-.filters .fb:nth-child(4) { --tc: oklch(0.72 0.18 145); }  /* Gluten-Free — green */
-.filters .fb:nth-child(5) { --tc: oklch(0.70 0.16 245); }  /* Mixes — blue */
+.filters .fb:nth-child(1) { --tc: #E00000; }   /* All — red */
+.filters .fb:nth-child(2) { --tc: #FF8800; }   /* Bread — orange */
+.filters .fb:nth-child(3) { --tc: #E6C200; }   /* Ancient — yellow */
+.filters .fb:nth-child(4) { --tc: #00BB00; }   /* Gluten-Free — green */
+.filters .fb:nth-child(5) { --tc: #0066FF; }   /* Mixes — blue */
+.filters .fb:nth-child(6) { --tc: #9900FF; }   /* Meals — violet */
 
 .filters .fb {
-  font-size: 17px !important;
-  padding: 10px 20px !important;
+  font-size: max(14px, min(4vh, 2.8vw)) !important;
+  padding: 0 .6em !important;
+  line-height: 1.2 !important;
   color: #0A0A0A !important;
   background: var(--tc) !important;
   border: 1.5px solid var(--tc) !important;
@@ -837,11 +838,12 @@ html, body { height: 100vh; overflow: hidden; }
   display: flex;
   align-items: stretch;
   background: #000;
-  border-bottom: 3px solid var(--r);
+  border-bottom: none;
   flex-shrink: 0;
   transition: border-color .2s;
   padding: 6px 8px;
   gap: 6px;
+  height: clamp(48px, 5.5vh, 72px);
 }
 .topbar-nav {
   display: flex;
@@ -856,10 +858,11 @@ html, body { height: 100vh; overflow: hidden; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 18px !important;
-  padding: 6px 4px !important;
+  line-height: 1 !important;
+  font-size: max(14px, min(4vh, 2.8vw)) !important;
+  padding: 0 .5em !important;
   letter-spacing: .02em !important;
-  min-height: 42px !important;
+  min-height: 0 !important;
   border: 1.5px solid #2a2a2a !important;
   border-radius: 6px;
   background: transparent;
@@ -921,8 +924,9 @@ html, body { height: 100vh; overflow: hidden; }
 }
 .topbar > .cbtn {
   flex-shrink: 0;
-  font-size: 14px;
-  padding: 6px 14px;
+  font-size: max(14px, min(4vh, 2.8vw)) !important;
+  padding: 0 .5em !important;
+  line-height: 1 !important;
   min-height: 42px;
   align-self: stretch;
   border-radius: 6px;
@@ -961,18 +965,21 @@ html, body { height: 100vh; overflow: hidden; }
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.topbar > .cbtn .cbadge {
-  background: #000;
-  color: var(--g);
+@keyframes cart-hue-shift {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+.topbar > .cbtn .cart-num {
+  color: #00cc00;
   font-weight: 900;
-  margin-left: 6px;
-  padding: 1px 7px;
-  border-radius: 10px;
-  min-width: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  animation: cart-hue-shift 3s linear infinite;
+  white-space: nowrap;
+}
+.topbar > .cbtn .cart-sep {
+  color: #000;
+  opacity: 0.4;
+  margin: 0 .15em;
+  font-weight: 400;
 }
 
 
@@ -1065,7 +1072,8 @@ html, body { height: 100vh; overflow: hidden; }
 
 
 /* ── RECIPE MODE for manifesto cards: bigger max-height + image at top of body ── */
-.manifesto.recipe-mode { grid-template-columns: 1fr 1fr; gap: 14px; }
+.manifesto.recipe-mode { display: block; columns: 2; column-gap: 14px; }
+.manifesto.recipe-mode .manifesto-item { break-inside: avoid; margin-bottom: 14px; }
 .manifesto.recipe-mode .manifesto-head {
   white-space: normal;
   overflow: visible;
@@ -1075,7 +1083,7 @@ html, body { height: 100vh; overflow: hidden; }
   padding: 12px 36px 12px 14px;
 }
 .manifesto.recipe-mode .manifesto-item.expanded .manifesto-body {
-  max-height: 2400px;
+  max-height: 5000px;
   padding: 0 0 14px !important;
 }
 .manifesto.recipe-mode .manifesto-item.expanded { cursor: default; }
@@ -1168,7 +1176,7 @@ ol.rc-list li::before {
   margin: 8px 0;
 }
 @media (max-width: 600px) {
-  .manifesto.recipe-mode { grid-template-columns: 1fr; }
+  .manifesto.recipe-mode { columns: 1; }
 }
 
 .lloc{font-family:var(--fc);font-size:14px;color:#A8A4A0;line-height:1.4;margin-top:3px;font-weight:400;}
@@ -1187,7 +1195,7 @@ ol.rc-list li::before {
     <div class="tab g" onclick="go('faqs',this,true)" role="link" tabindex="0">FAQs</div>
     <div class="tab" onclick="go('contact',this,false)" role="link" tabindex="0">Contact</div>
   </nav>
-  <button class="cbtn" onclick="openCart()" aria-label="Open cart">Cart <span class="cbadge" id="cb-main">0</span></button>
+  <button class="cbtn" onclick="openCart()" aria-label="Open cart">CART <span class="cart-num" id="cb-count">0</span><span class="cart-sep">│</span><span class="cart-num" id="cb-total">$0</span></button>
 </header>
 <div class="scroll" id="scroll" role="main" aria-label="Site content">
 
@@ -1216,7 +1224,8 @@ ol.rc-list li::before {
     <button class="fb" onclick="filt('bread',this)" aria-pressed="false" role="radio">Bread Flours</button>
     <button class="fb" onclick="filt('ancient',this)" aria-pressed="false" role="radio">Ancient Grains</button>
     <button class="fb" onclick="filt('gf',this)" aria-pressed="false" role="radio">Gluten-Free</button>
-    <button class="fb" onclick="filt('mix',this)" aria-pressed="false" role="radio">Mixes &amp; Meals</button>
+    <button class="fb" onclick="filt('mix',this)" aria-pressed="false" role="radio">Mixes</button>
+    <button class="fb" onclick="filt('meal',this)" aria-pressed="false" role="radio">Meals</button>
   </div>
   <div class="pgrid" id="hgrid">
     <div class="pc" data-c="bread"><div class="pci"><img src="images/img-001-0c34742d.jpg" alt="All-Purpose Flour, 2 lb bag" onerror="this.style.display='none'"></div><div class="pcb"><h3>All-Purpose Flour</h3><p>A combination of hard red, soft white, and spelt wheats for an excellent rise and perfect crumb. Harvested right here in Rocky Mount, VA</p><div class="pcf"><div><div class="price">$8.00</div><span class="sz">2 lb</span></div><button class="atc" style="background:var(--r)" onclick='add({id:"ap",name:"All-Purpose Flour",size:"2 lb",price:8,icon:"🌾"})'>+ Add</button></div></div></div>
@@ -1257,34 +1266,6 @@ ol.rc-list li::before {
 <div class="ph" style="border-bottom-color:var(--g)"><span class="ptag" style="color:var(--g)">From Our Kitchen</span><h1>Recipes</h1><p>Tested using our stone-milled flours. Each one is designed to show what whole-grain flour can do when it's this fresh.</p></div>
 <div class="sec"><div class="manifesto recipe-mode" style="--ac:var(--g)">
   <div class="manifesto-item recipe-card">
-    <div class="manifesto-head">Gluten-Free Artisan Bread</div>
-    <div class="manifesto-body">
-      <div class="rc-img"><img src="images/img-011-cf30922e.jpg" alt="Gluten-Free Artisan Bread" onerror="this.style.display='none'"></div>
-      <p class="rc-summary">Makes about four 1-pound loaves. With this method, you save time by mixing a large batch and storing it in the refrigerator, pulling off dough to use as you need it. The nice thing about the long fermentation is the dough develops a sourdough flavor.</p>
-      <p class="rc-attribution">From Gluten-Free Artisan Bread in Five Minutes a Day — <a href="https://artisanbreadinfive.com/buying-our-books/" target="_blank" rel="noopener">https://artisanbreadinfive.com/buying-our-books/</a></p>
-      <div class="rc-content">
-        <h4>Ingredients</h4>
-        <ul class="rc-list">
-          <li>6 1/2 cups (2 pounds 3 ounces / 990 grams)</li>
-          <li>1 tablespoon Active Dry or Quick Rise yeast</li>
-          <li>1 to 1 1/2 tablespoons salt</li>
-          <li>2 tablespoons sugar or honey (optional)</li>
-          <li>3 3/4 cups water</li>
-        </ul>
-        <h4>To mix the dough</h4>
-        <p>I suggest using a Stand Mixer with the paddle attachment for the smoothest dough and ease of mixing. You can still do the mixing in a bucket or bowl, but it will take a bit more effort to get a really smooth dough.</p>
-        <p>In a stand mixer, fitted with the paddle attachment, add the yeast to the flour mix. Add the salt and the sugar (if using) to the flour mix. You can add more or less salt, depending on your preference. Blend all the dry ingredients for a few seconds.</p>
-        <p>While the mixer is on low speed, slowly add all the liquid. Once all of the liquid is added to the mixer, turn it up to medium-high speed and let it blend for about 1 minute. The dough will look and feel like soft biscuit dough.</p>
-        <p>Transfer the dough to a 4+ quart Food-Storage Container. The dough will rise some, but don’t expect it to double in size. Cover the container, but it shouldn’t be airtight. You may want to poke a very small hole in the lid to allow the gas from the yeast to escape. Allow the dough to sit at room temperature for 2 hours. If your kitchen is cool, it may take 2 1/2 to 3 hours. You can use the dough after the initial rise or refrigerate the dough for about 10 days</p>
-        <p>When you are ready to bake, sprinkle some GF flour on a piece of parchment. Dust the surface of the dough with more flour. Scoop up a 1-pound piece of dough. Unlike wheat dough, this will not have any stretch when you lift it out, it will just break off. Place the dough on the parchment and shape it into a ball. It may not be smooth at this point. Using wet fingers, smooth out the surface of the dough. Creating a smooth surface also seems to help trap the gas from the yeast and improve the rise of the bread. Cover loosely with plastic and allow to rise for about an hour. If you are using fresh dough, then just 30 minutes.</p>
-        <p>Preheat oven with a Baking Stone to 450°F. It is very important that your oven be hot enough, so use an oven thermometer to check the actual temperature. If you are using a thick Baking Stone, this can take 45 minutes or longer. Put a broiler tray on the bottom of the oven, which will be used to catch water to create steam in your oven.</p>
-        <p>Once the dough is ready (it may not rise much while resting), dust it with more flour and slash the top with a serrated knife. Slide the loaf onto the preheated baking stone, add 1 cup water to broiler tray to create steam and quickly close the door. Bake the loaf for about 45 minutes or until nicely browned.</p>
-        <p>Allow the loaf to cool to room temperature before cutting into it. The gluten-free artisan bread will be quite gummy if you cut into it before it is totally cooled. Using a sharp serrated bread knife is the best for cutting this loaf.</p>
-        <p>If you don’t finish the loaf in one or two days, wrap it well and freeze it for another time. This gluten-free artisan bread also makes wonderful toast the next morning, and you can use up the remaining dough over the next 10 days. All your subsequent loaves are made from pre-mixed, stored dough that will develop sourdough flavors as it ages.</p>
-      </div>
-    </div>
-  </div>
-  <div class="manifesto-item recipe-card">
     <div class="manifesto-head">Olive Oil Pizza &amp; Flatbread Dough</div>
     <div class="manifesto-body">
       <div class="rc-img"><img src="images/img-003-3cc67de9.jpg" alt="Olive Oil Pizza &amp; Flatbread Dough" onerror="this.style.display='none'"></div>
@@ -1305,34 +1286,6 @@ ol.rc-list li::before {
           <li>Mix in the flour with a stand mixer fitted with the dough mixed attachment (or knead by hand) for several minutes until soft and pliable.</li>
           <li>Cover (not airtight) for approximately two hours and let rise at room temperature until the dough rises and collapses (flattens on top).</li>
           <li>Dough can be used immediately after the intitial rise or refrigerated for up to two weeks.</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-  <div class="manifesto-item recipe-card">
-    <div class="manifesto-head">Whole Grain Peasant Bread</div>
-    <div class="manifesto-body">
-      <div class="rc-img"><img src="images/img-002-9c79949f.jpg" alt="Whole Grain Peasant Bread" onerror="this.style.display='none'"></div>
-      <div class="rc-meta">Prep: 4 hours Bake time: 40 mins Yield: 2 loaves</div>
-      <div class="rc-content">
-        <h4>Ingredients</h4>
-        <ul class="rc-list">
-          <li>3 cups of lukewarm water</li>
-          <li>1 tbsp granulated yeast</li>
-          <li>1 tbsp salt</li>
-          <li>6 1/2 cups all purpose flour (or any combination of our flours--einkorn, spelt, rye, and kamut are delicious additions-- with at least 50% all purpose)</li>
-        </ul>
-        <h4>Directions</h4>
-        <ol class="rc-list">
-          <li>In a large mixing bowl, combine the water, yeast, and salt.</li>
-          <li>Add in the flour all at once and stir to combine. Using a stand mixer fitted with the dough mixer attachment, knead the dough for several minutes until soft and pliable. Alternatively, use your hands to mix or a danish dough whisk.</li>
-          <li>Cover the bowl (not airtight) and allow to rest and rise at room temperature for 2 hours (may be longer depending on room temperature) until the dough rises and flattens on top.</li>
-          <li>Using wet hands, gently remove half of the dough from the bowl and quickly shape into a ball or oval by stretching the surface of the dough around to the bottom on all four sides, rotating the ball a quarter-turn as you go. If you want to do two loaves, repeat with other half of the dough. Otherwise refrigerate the dough until you are ready to use, up to 2 weeks.</li>
-          <li>Let the dough rise on parchment paper on a pizza peel for 60-90 minutes.</li>
-          <li>Preheat the oven to 450 degrees with a baking stone on the center rack, with a metal broiler tray on the bottom rack.</li>
-          <li>Cut the dough with 1/4 inch deep slashes using a wet serrated bread knife.</li>
-          <li>Slide the loaf into the oven onto the preheated stone and add a cup of hot water into the broiler tray. Bake the bread for 35-45 minutes or until a deep brown color. You can remove the parchment paper after 20-25 minutes to crisp up the bottom crust.</li>
-          <li>Allow the loaf to cool on a rack until it is room temperature before slicing. Enjoy!</li>
         </ol>
       </div>
     </div>
@@ -1362,6 +1315,34 @@ ol.rc-list li::before {
           <li>Preheat the oven to 425 degrees with an empty broiler tray on the bottom shelf.</li>
           <li>Before placing in the oven, dimple focaccia all over with your fingers, creating deep depressions in the dough. Drizzle with olive oil and sprinkle with rosemary, and salt.</li>
           <li>Place the baking sheet on the center rack of the oven. Pour 1 cup of hot water into the broiler tray and quickly close the oven door. Bake for about 20 minutes, or until the crust is medium brown. Let cool slightly and enjoy!</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="manifesto-item recipe-card">
+    <div class="manifesto-head">Whole Grain Peasant Bread</div>
+    <div class="manifesto-body">
+      <div class="rc-img"><img src="images/img-002-9c79949f.jpg" alt="Whole Grain Peasant Bread" onerror="this.style.display='none'"></div>
+      <div class="rc-meta">Prep: 4 hours Bake time: 40 mins Yield: 2 loaves</div>
+      <div class="rc-content">
+        <h4>Ingredients</h4>
+        <ul class="rc-list">
+          <li>3 cups of lukewarm water</li>
+          <li>1 tbsp granulated yeast</li>
+          <li>1 tbsp salt</li>
+          <li>6 1/2 cups all purpose flour (or any combination of our flours--einkorn, spelt, rye, and kamut are delicious additions-- with at least 50% all purpose)</li>
+        </ul>
+        <h4>Directions</h4>
+        <ol class="rc-list">
+          <li>In a large mixing bowl, combine the water, yeast, and salt.</li>
+          <li>Add in the flour all at once and stir to combine. Using a stand mixer fitted with the dough mixer attachment, knead the dough for several minutes until soft and pliable. Alternatively, use your hands to mix or a danish dough whisk.</li>
+          <li>Cover the bowl (not airtight) and allow to rest and rise at room temperature for 2 hours (may be longer depending on room temperature) until the dough rises and flattens on top.</li>
+          <li>Using wet hands, gently remove half of the dough from the bowl and quickly shape into a ball or oval by stretching the surface of the dough around to the bottom on all four sides, rotating the ball a quarter-turn as you go. If you want to do two loaves, repeat with other half of the dough. Otherwise refrigerate the dough until you are ready to use, up to 2 weeks.</li>
+          <li>Let the dough rise on parchment paper on a pizza peel for 60-90 minutes.</li>
+          <li>Preheat the oven to 450 degrees with a baking stone on the center rack, with a metal broiler tray on the bottom rack.</li>
+          <li>Cut the dough with 1/4 inch deep slashes using a wet serrated bread knife.</li>
+          <li>Slide the loaf into the oven onto the preheated stone and add a cup of hot water into the broiler tray. Bake the bread for 35-45 minutes or until a deep brown color. You can remove the parchment paper after 20-25 minutes to crisp up the bottom crust.</li>
+          <li>Allow the loaf to cool on a rack until it is room temperature before slicing. Enjoy!</li>
         </ol>
       </div>
     </div>
@@ -1402,6 +1383,34 @@ ol.rc-list li::before {
           <li>Place baking sheets in the oven, one on the middle rack and one on the upper. Bake for 8-11 minutes. Place the baking sheets on cooling racks to cool. The cookies will crisp further as they cool.</li>
           <li>Wait until the cookies are fully cooled before decorating. To make the icing, whisk the egg white with a mixer until frothy and slowly add the sugar until thick and glossy. Transfer to a small resealable plastic bag and empty excess air to seal the bag. Cut off a tiny piece of one of the bottom corners and squeeze the icing through the hole to decorate. Let icing harden about 20 minutes before stacking in a storage container. Cookies will keep up to a week at room temperature, if they last that long!</li>
         </ol>
+      </div>
+    </div>
+  </div>
+  <div class="manifesto-item recipe-card">
+    <div class="manifesto-head">Gluten-Free Artisan Bread</div>
+    <div class="manifesto-body">
+      <div class="rc-img"><img src="images/img-011-cf30922e.jpg" alt="Gluten-Free Artisan Bread" onerror="this.style.display='none'"></div>
+      <p class="rc-summary">Makes about four 1-pound loaves. With this method, you save time by mixing a large batch and storing it in the refrigerator, pulling off dough to use as you need it. The nice thing about the long fermentation is the dough develops a sourdough flavor.</p>
+      <p class="rc-attribution">From Gluten-Free Artisan Bread in Five Minutes a Day — <a href="https://artisanbreadinfive.com/buying-our-books/" target="_blank" rel="noopener">https://artisanbreadinfive.com/buying-our-books/</a></p>
+      <div class="rc-content">
+        <h4>Ingredients</h4>
+        <ul class="rc-list">
+          <li>6 1/2 cups (2 pounds 3 ounces / 990 grams)</li>
+          <li>1 tablespoon Active Dry or Quick Rise yeast</li>
+          <li>1 to 1 1/2 tablespoons salt</li>
+          <li>2 tablespoons sugar or honey (optional)</li>
+          <li>3 3/4 cups water</li>
+        </ul>
+        <h4>To mix the dough</h4>
+        <p>I suggest using a Stand Mixer with the paddle attachment for the smoothest dough and ease of mixing. You can still do the mixing in a bucket or bowl, but it will take a bit more effort to get a really smooth dough.</p>
+        <p>In a stand mixer, fitted with the paddle attachment, add the yeast to the flour mix. Add the salt and the sugar (if using) to the flour mix. You can add more or less salt, depending on your preference. Blend all the dry ingredients for a few seconds.</p>
+        <p>While the mixer is on low speed, slowly add all the liquid. Once all of the liquid is added to the mixer, turn it up to medium-high speed and let it blend for about 1 minute. The dough will look and feel like soft biscuit dough.</p>
+        <p>Transfer the dough to a 4+ quart Food-Storage Container. The dough will rise some, but don’t expect it to double in size. Cover the container, but it shouldn’t be airtight. You may want to poke a very small hole in the lid to allow the gas from the yeast to escape. Allow the dough to sit at room temperature for 2 hours. If your kitchen is cool, it may take 2 1/2 to 3 hours. You can use the dough after the initial rise or refrigerate the dough for about 10 days</p>
+        <p>When you are ready to bake, sprinkle some GF flour on a piece of parchment. Dust the surface of the dough with more flour. Scoop up a 1-pound piece of dough. Unlike wheat dough, this will not have any stretch when you lift it out, it will just break off. Place the dough on the parchment and shape it into a ball. It may not be smooth at this point. Using wet fingers, smooth out the surface of the dough. Creating a smooth surface also seems to help trap the gas from the yeast and improve the rise of the bread. Cover loosely with plastic and allow to rise for about an hour. If you are using fresh dough, then just 30 minutes.</p>
+        <p>Preheat oven with a Baking Stone to 450°F. It is very important that your oven be hot enough, so use an oven thermometer to check the actual temperature. If you are using a thick Baking Stone, this can take 45 minutes or longer. Put a broiler tray on the bottom of the oven, which will be used to catch water to create steam in your oven.</p>
+        <p>Once the dough is ready (it may not rise much while resting), dust it with more flour and slash the top with a serrated knife. Slide the loaf onto the preheated baking stone, add 1 cup water to broiler tray to create steam and quickly close the door. Bake the loaf for about 45 minutes or until nicely browned.</p>
+        <p>Allow the loaf to cool to room temperature before cutting into it. The gluten-free artisan bread will be quite gummy if you cut into it before it is totally cooled. Using a sharp serrated bread knife is the best for cutting this loaf.</p>
+        <p>If you don’t finish the loaf in one or two days, wrap it well and freeze it for another time. This gluten-free artisan bread also makes wonderful toast the next morning, and you can use up the remaining dough over the next 10 days. All your subsequent loaves are made from pre-mixed, stored dough that will develop sourdough flavors as it ages.</p>
       </div>
     </div>
   </div>
@@ -1546,7 +1555,7 @@ function tot(){return cart.reduce(function(s,i){return s+i.price*i.qty;},0);}
 function cnt(){return cart.reduce(function(s,i){return s+i.qty;},0);}
 function renderCart(){
   var n=cnt();
-  document.querySelectorAll('.cbadge').forEach(function(b){b.textContent=n;b.style.display=n>0?'flex':'none';});
+  document.querySelectorAll('.cbadge').forEach(function(b){b.textContent=n;b.style.display=n>0?'flex':'none';});var ce=document.getElementById('cb-count');if(ce)ce.textContent=n;var te=document.getElementById('cb-total');if(te)te.textContent='$'+tot().toFixed(0);
   var el=document.getElementById('citems');
   if(!cart.length){el.innerHTML='<div class="cem"><p>Your cart is empty.</p></div>';}
   else{el.innerHTML=cart.map(function(i){return'<div class="cit"><div class="citim" aria-hidden="true">'+i.icon+'</div><div><div class="citn">'+i.name+'</div><div class="cits">'+i.size+'</div><div class="citc"><button class="qb" onclick="sq(\''+i.id+'\','+(i.qty-1)+')" aria-label="Decrease quantity of '+i.name+'">−</button><span class="qv" aria-label="Quantity: '+i.qty+'">'+i.qty+'</span><button class="qb" onclick="sq(\''+i.id+'\','+(i.qty+1)+')" aria-label="Increase quantity of '+i.name+'">+</button><span class="rm" onclick="rem(\''+i.id+'\')" role="button" tabindex="0" aria-label="Remove '+i.name+' from cart">Remove</span></div></div><div class="cip">$'+(i.price*i.qty).toFixed(2)+'</div></div>';}).join('');}
