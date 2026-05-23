@@ -1424,7 +1424,7 @@ ol.rc-list li::before {
   <div class="manifesto-item"><div class="manifesto-head">What makes stone-ground flour different from store-bought?</div><p class="manifesto-body">Industrial roller milling separates the grain into bran, germ, and endosperm — removes the bran and germ, and mills only the starchy endosperm into white flour. Stone milling grinds the whole grain together in a single pass. The bran, germ, and endosperm are never separated. More fiber, more minerals, more B vitamins, and significantly more flavor.</p></div>
   <div class="manifesto-item"><div class="manifesto-head">Are all your products certified organic?</div><p class="manifesto-body">Yes. Every grain we source and mill is certified organic. We don't blend organic and conventional grain, and we don't handle any non-organic product in our facility.</p></div>
   <div class="manifesto-item"><div class="manifesto-head">Can I substitute your flour 1:1 for commercial flour in recipes?</div><p class="manifesto-body">For most recipes, yes — but whole-grain flours absorb liquid differently than refined white flour. You'll likely need slightly more liquid (10–15% more). Our pastry flour is closest to commercial all-purpose in performance and can substitute 1:1 in most baking.</p></div>
-  <div class="manifesto-item"><div class="manifesto-head">How does online ordering work?</div><p class="manifesto-body">Add items to your cart, fill out the checkout form, and submit — this sends us your order by email. We'll confirm within 24 hours and follow up to arrange payment via Venmo, PayPal, or card at market pickup.</p></div>
+  <div class="manifesto-item"><div class="manifesto-head">How does online ordering work?</div><p class="manifesto-body">Add items to your cart, enter your shipping address, and pay by card, Apple Pay, Google Pay, or other supported methods at checkout. You'll get an order confirmation email immediately. We ship within 2 business days via USPS Priority Mail.</p></div>
   <div class="manifesto-item"><div class="manifesto-head">Do you ship?</div><p class="manifesto-body">Yes — we ship within the continental United States. Shipping is $7.99 on orders under $35; orders over $35 ship free.</p></div>
   <div class="manifesto-item"><div class="manifesto-head">How long does your flour last?</div><p class="manifesto-body">Room temperature in a sealed container: 1–3 months. Refrigerator: 6 months. Freezer: up to 1 year. Whole-grain flour contains the germ's natural oils that can go rancid. Rancid flour smells like paint or pencil shavings.</p></div>
   <div class="manifesto-item"><div class="manifesto-head">What does "worker-owned" mean for the business?</div><p class="manifesto-body">Everyone at the mill has an equal vote on major decisions — pricing, sourcing, expansion, how to use the year's earnings. There are no outside owners. The people who do the work make the calls together.</p></div>
@@ -1457,9 +1457,9 @@ ol.rc-list li::before {
   <div class="citems" id="citems"></div>
   <div class="cft">
     <div class="csub"><span>Subtotal</span><span id="csub">$0.00</span></div>
-    <div class="csub"><span>Shipping</span><span id="cship">$7.99</span></div>
+    <div class="csub"><span>Shipping</span><span id="cship">$8.00</span></div>
     <div class="ctot"><span>Total</span><span id="ctot">$0.00</span></div>
-    <div class="snote">Free shipping over $35</div>
+    <div class="snote">Free shipping over $50 · Tax calculated at checkout</div>
     <button class="btn btn-a btn-fw" id="checkout-btn" onclick="openCheckout()">Proceed to Checkout →</button>
   </div>
 </div>
@@ -1468,18 +1468,35 @@ ol.rc-list li::before {
   <div class="modal">
     <div class="mhd"><h3 id="modal-title">Complete Your Order</h3><button class="cx" onclick="closeCheckout()" aria-label="Close checkout">✕</button></div>
     <div class="mbd">
-      <div class="sscr" id="sscr"><div class="sico">Order Sent</div><h3>We'll confirm within 24 hours.</h3><p>Check your email client for the order details.</p><button class="btn btn-d btn-sm" onclick="closeCheckout()">Continue Shopping</button></div>
-      <form id="cform" onsubmit="doOrder(event)">
+      <div class="sscr" id="sscr"><div class="sico">Payment Received</div><h3>Order confirmed.</h3><p id="sscr-msg">Receipt sent to your email. We ship within 2 business days.</p><button class="btn btn-d btn-sm" onclick="closeCheckout()">Continue Shopping</button></div>
+
+      <!-- STEP 1: Shipping address -->
+      <form id="cform" onsubmit="goToPayment(event)">
         <div class="osum"><h4>Order Summary</h4><div id="olines"></div></div>
-        <div class="fnote">Orders confirmed by email. Payment via Venmo, PayPal, or card at market pickup.</div>
+        <div class="fnote">Shipping to US addresses. Tax calculated at the next step.</div>
         <div class="fr"><div class="fg"><label for="fname">Full Name<span class="req" aria-label="required">*</span></label><input id="fname" name="name" aria-required="true" required placeholder="Jane Smith"></div><div class="fg"><label for="fphone">Phone</label><input id="fphone" name="phone" placeholder="(276) 555-0000"></div></div>
         <div class="fg"><label for="femail">Email<span class="req" aria-label="required">*</span></label><input type="email" id="femail" name="email" aria-required="true" required placeholder="you@example.com"></div>
         <div class="fg"><label for="faddress">Address<span class="req" aria-label="required">*</span></label><input id="faddress" name="address" aria-required="true" required placeholder="123 Main St"></div>
+        <div class="fg"><label for="faddress2">Apt / Suite / Unit</label><input id="faddress2" name="address2" placeholder="Optional"></div>
         <div class="fr"><div class="fg"><label for="fcity">City<span class="req" aria-label="required">*</span></label><input id="fcity" name="city" aria-required="true" required placeholder="Floyd"></div><div class="fg"><label for="fstate">State<span class="req" aria-label="required">*</span></label><input id="fstate" name="state" aria-required="true" required placeholder="VA" maxlength="2"></div></div>
-        <div class="fr"><div class="fg"><label for="fzip">ZIP<span class="req" aria-label="required">*</span></label><input id="fzip" name="zip" aria-required="true" required placeholder="24091"></div><div class="fg"><label for="fdelivery">Pickup or Ship?</label><select id="fdelivery" name="delivery"><option>Ship to address</option><option>Floyd Saturday Market</option><option>Floyd Thursday Market</option><option>Riverstone Farm Store</option><option>Roanoke Co+op</option></select></div></div>
-        <div class="fg"><label for="fnotes">Notes</label><textarea id="fnotes" name="notes" placeholder="Questions, anything else..."></textarea></div>
-        <button type="submit" class="btn btn-a btn-fw">Send Order →</button>
+        <div class="fr"><div class="fg"><label for="fzip">ZIP<span class="req" aria-label="required">*</span></label><input id="fzip" name="zip" aria-required="true" required placeholder="24091"></div><div class="fg"></div></div>
+        <button type="submit" class="btn btn-a btn-fw" id="continue-btn">Continue to Payment →</button>
       </form>
+
+      <!-- STEP 2: Payment -->
+      <div id="payment-step" style="display:none">
+        <div class="osum"><h4>Order Summary</h4>
+          <div class="ol"><span>Subtotal</span><span id="sum-subtotal">$0.00</span></div>
+          <div class="ol"><span>Shipping</span><span id="sum-shipping">$0.00</span></div>
+          <div class="ol" id="sum-tax-row"><span>Tax</span><span id="sum-tax">$0.00</span></div>
+          <div class="ol tot"><span>Total</span><span id="sum-total">$0.00</span></div>
+        </div>
+        <div class="fnote" style="margin:14px 0 8px;">Pay with card, Apple Pay, Google Pay, Link, ACH, or Klarna / Afterpay / Affirm where eligible.</div>
+        <div id="payment-element" style="margin-bottom:14px;"></div>
+        <div id="payment-error" role="alert" style="display:none;color:#FF6666;font-size:13px;margin-bottom:10px;"></div>
+        <button id="pay-button" class="btn btn-a btn-fw" onclick="submitPayment()">Pay <span id="pay-amount">$0.00</span></button>
+        <button type="button" onclick="backToAddress()" class="btn btn-d btn-sm" style="margin-top:8px;">← Edit address</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1528,18 +1545,172 @@ function renderCart(){
   var el=document.getElementById('citems');
   if(!cart.length){el.innerHTML='<div class="cem"><p>Your cart is empty.</p></div>';}
   else{el.innerHTML=cart.map(function(i){return'<div class="cit"><div class="citim" aria-hidden="true">'+i.icon+'</div><div><div class="citn">'+i.name+'</div><div class="cits">'+i.size+'</div><div class="citc"><button class="qb" onclick="sq(\''+i.id+'\','+(i.qty-1)+')" aria-label="Decrease quantity of '+i.name+'">−</button><span class="qv" aria-label="Quantity: '+i.qty+'">'+i.qty+'</span><button class="qb" onclick="sq(\''+i.id+'\','+(i.qty+1)+')" aria-label="Increase quantity of '+i.name+'">+</button><span class="rm" onclick="rem(\''+i.id+'\')" role="button" tabindex="0" aria-label="Remove '+i.name+' from cart">Remove</span></div></div><div class="cip">$'+(i.price*i.qty).toFixed(2)+'</div></div>';}).join('');}
-  var t=tot(),sh=t>=35?0:7.99;
+  var t=tot(),sh=t>=5000/100?0:8;
   document.getElementById('csub').textContent='$'+t.toFixed(2);
   document.getElementById('cship').textContent=sh===0?'FREE':'$'+sh.toFixed(2);
   document.getElementById('ctot').textContent='$'+(t+sh).toFixed(2);
   var ol=document.getElementById('olines');if(!ol)return;
-  ol.innerHTML=cart.map(function(i){return'<div class="ol"><span>'+i.name+' × '+i.qty+'</span><span>$'+(i.price*i.qty).toFixed(2)+'</span></div>';}).join('')+'<div class="ol"><span>Shipping</span><span>'+(sh===0?'FREE':'$'+sh.toFixed(2))+'</span></div><div class="ol tot"><span>Total</span><span>$'+(t+sh).toFixed(2)+'</span></div>';
+  ol.innerHTML=cart.map(function(i){return'<div class="ol"><span>'+i.name+' × '+i.qty+'</span><span>$'+(i.price*i.qty).toFixed(2)+'</span></div>';}).join('')+'<div class="ol"><span>Shipping</span><span>'+(sh===0?'FREE':'$'+sh.toFixed(2))+'</span></div><div class="ol tot"><span>Subtotal + Shipping</span><span>$'+(t+sh).toFixed(2)+'</span></div>';
 }
 function openCart(){document.getElementById('cov').classList.add('on');var p=document.getElementById('cpanel');p.classList.add('on');setTimeout(function(){var cx=p.querySelector('.cx');if(cx)cx.focus();},50);}
 function closeCart(){document.getElementById('cov').classList.remove('on');document.getElementById('cpanel').classList.remove('on');var btn=document.querySelector('.cbtn');if(btn)btn.focus();}
-function openCheckout(){if(!cnt()){toast('Add items first');return;}closeCart();document.getElementById('mbg').classList.add('on');}
+function openCheckout(){if(!cnt()){toast('Add items first');return;}closeCart();document.getElementById('mbg').classList.add('on');resetCheckoutUI();}
 function closeCheckout(){document.getElementById('mbg').classList.remove('on');}
-function doOrder(e){e.preventDefault();document.getElementById('cform').style.display='none';document.getElementById('sscr').classList.add('on');cart=[];renderCart();}
+function resetCheckoutUI(){
+  document.getElementById('cform').style.display='';
+  document.getElementById('payment-step').style.display='none';
+  document.getElementById('sscr').classList.remove('on');
+  var err=document.getElementById('payment-error');if(err){err.style.display='none';err.textContent='';}
+}
+function backToAddress(){
+  document.getElementById('cform').style.display='';
+  document.getElementById('payment-step').style.display='none';
+}
+
+// --- Stripe Payment Element integration ---
+var stripeInstance=null,stripeElements=null,stripeConfig=null,currentOrderId=null;
+
+function loadStripeJs(){
+  return new Promise(function(resolve,reject){
+    if(window.Stripe)return resolve();
+    var s=document.createElement('script');
+    s.src='https://js.stripe.com/v3/';
+    s.onload=resolve;
+    s.onerror=function(){reject(new Error('Failed to load Stripe.js'));};
+    document.head.appendChild(s);
+  });
+}
+
+function fetchStripeConfig(){
+  if(stripeConfig)return Promise.resolve(stripeConfig);
+  return fetch('/api/config').then(function(r){return r.json();}).then(function(c){stripeConfig=c;return c;});
+}
+
+async function goToPayment(e){
+  e.preventDefault();
+  var btn=document.getElementById('continue-btn');
+  btn.disabled=true;btn.textContent='Setting up payment...';
+
+  try{
+    var payload={
+      cart:cart.map(function(i){return{id:i.id,qty:i.qty};}),
+      email:document.getElementById('femail').value.trim(),
+      name:document.getElementById('fname').value.trim(),
+      address:{
+        line1:document.getElementById('faddress').value.trim(),
+        line2:document.getElementById('faddress2').value.trim(),
+        city:document.getElementById('fcity').value.trim(),
+        state:document.getElementById('fstate').value.trim().toUpperCase(),
+        postal_code:document.getElementById('fzip').value.trim(),
+        country:'US',
+      },
+    };
+
+    var r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    var data=await r.json();
+    if(!r.ok)throw new Error(data.error||'Checkout setup failed');
+
+    currentOrderId=data.orderId;
+    document.getElementById('sum-subtotal').textContent='$'+(data.amount.subtotal_cents/100).toFixed(2);
+    document.getElementById('sum-shipping').textContent=data.amount.shipping_cents===0?'FREE':'$'+(data.amount.shipping_cents/100).toFixed(2);
+    document.getElementById('sum-tax').textContent='$'+(data.amount.tax_cents/100).toFixed(2);
+    document.getElementById('sum-total').textContent='$'+(data.amount.total_cents/100).toFixed(2);
+    document.getElementById('pay-amount').textContent='$'+(data.amount.total_cents/100).toFixed(2);
+    if(data.amount.tax_cents===0)document.getElementById('sum-tax-row').style.display='none';
+    else document.getElementById('sum-tax-row').style.display='';
+
+    await loadStripeJs();
+    var cfg=await fetchStripeConfig();
+    if(!cfg.publishableKey)throw new Error('Payment system is not yet configured. Please contact the mill.');
+
+    stripeInstance=Stripe(cfg.publishableKey);
+    stripeElements=stripeInstance.elements({
+      clientSecret:data.clientSecret,
+      appearance:{
+        theme:'night',
+        variables:{
+          colorPrimary:'#CC0000',
+          colorBackground:'#1a1a1a',
+          colorText:'#F0EDE6',
+          colorDanger:'#FF6666',
+          fontFamily:'system-ui, sans-serif',
+          borderRadius:'4px',
+        },
+      },
+    });
+    var pe=stripeElements.create('payment',{layout:'tabs'});
+    pe.mount('#payment-element');
+
+    document.getElementById('cform').style.display='none';
+    document.getElementById('payment-step').style.display='';
+  }catch(err){
+    alert(err.message||'Could not start checkout. Please try again.');
+  }finally{
+    btn.disabled=false;btn.textContent='Continue to Payment →';
+  }
+}
+
+async function submitPayment(){
+  var btn=document.getElementById('pay-button');
+  var err=document.getElementById('payment-error');
+  btn.disabled=true;var orig=btn.innerHTML;btn.textContent='Processing...';err.style.display='none';
+
+  try{
+    var result=await stripeInstance.confirmPayment({
+      elements:stripeElements,
+      confirmParams:{
+        return_url:window.location.origin+'/?paid=1',
+      },
+      redirect:'if_required',
+    });
+    if(result.error){
+      err.textContent=result.error.message||'Payment failed.';
+      err.style.display='';
+      btn.disabled=false;btn.innerHTML=orig;
+      return;
+    }
+    // No redirect needed (card succeeded without 3DS). Show success.
+    showCheckoutSuccess();
+  }catch(e){
+    err.textContent=e.message||'Payment error. Please try again.';
+    err.style.display='';
+    btn.disabled=false;btn.innerHTML=orig;
+  }
+}
+
+function showCheckoutSuccess(){
+  document.getElementById('cform').style.display='none';
+  document.getElementById('payment-step').style.display='none';
+  document.getElementById('sscr').classList.add('on');
+  cart=[];saveCart();renderCart();
+}
+
+// --- Cart localStorage persistence (survives page refresh) ---
+var CART_KEY='ftp_cart_v1';
+function saveCart(){try{localStorage.setItem(CART_KEY,JSON.stringify(cart));}catch(e){}}
+function loadCart(){try{var s=localStorage.getItem(CART_KEY);if(s)cart=JSON.parse(s)||[];}catch(e){cart=[];}}
+
+// Wrap mutators to persist
+var _add=add,_rem=rem,_sq=sq;
+add=function(p){_add(p);saveCart();};
+rem=function(id){_rem(id);saveCart();};
+sq=function(id,q){_sq(id,q);saveCart();};
+
+// On page load: rehydrate cart, check for payment redirect result
+(function(){
+  loadCart();renderCart();
+  var p=new URLSearchParams(window.location.search);
+  if(p.get('paid')==='1'||p.get('redirect_status')==='succeeded'){
+    // User returned from a Stripe redirect (e.g. 3DS challenge). Show success.
+    document.getElementById('mbg').classList.add('on');
+    document.getElementById('cform').style.display='none';
+    document.getElementById('payment-step').style.display='none';
+    document.getElementById('sscr').classList.add('on');
+    cart=[];saveCart();renderCart();
+    // Clean the URL
+    history.replaceState({},'',window.location.pathname);
+  }
+})();
 var tt;
 function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('on');var lr=document.getElementById('cart-live');if(lr)lr.textContent=m;clearTimeout(tt);tt=setTimeout(function(){el.classList.remove('on');if(lr)lr.textContent='';},2200);}
 function tfaq(b){var it=b.closest('.fi');var was=it.classList.contains('on');document.querySelectorAll('.fi.on').forEach(function(f){f.classList.remove('on');f.querySelector('.fq').setAttribute('aria-expanded','false');});if(!was){it.classList.add('on');b.setAttribute('aria-expanded','true');}}
