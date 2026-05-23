@@ -94,9 +94,11 @@ export async function onRequestPost({ request, env }) {
   }
 
   // --- Create PaymentIntent ---
-  // automatic_tax requires a Customer with address (set above).
-  // We pre-create a single line item for the cart subtotal + shipping;
-  // Stripe Tax adds tax on top during confirm.
+  // Note: Stripe Tax with Payment Element requires the Tax Calculation API
+  // (/v1/tax/calculations -> /v1/payment_intents -> /v1/tax/transactions),
+  // NOT the automatic_tax param (that's Checkout Sessions only). For now we
+  // ship without tax; Phase 2 will implement the Tax Calculation flow when
+  // Stripe Tax is activated in the Dashboard.
   let intent;
   try {
     intent = await createPaymentIntent(env.STRIPE_SECRET_KEY, {
@@ -104,7 +106,6 @@ export async function onRequestPost({ request, env }) {
       currency: 'usd',
       customer: customer.id,
       automatic_payment_methods: { enabled: true },
-      automatic_tax: { enabled: env.STRIPE_TAX_ENABLED === 'true' },
       shipping: {
         name: name.trim(),
         address: {
@@ -128,24 +129,13 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({ error: 'Failed to initialize payment' }, 500);
   }
 
-  // After tax is computed, the PaymentIntent's `amount` reflects the final total
-  // (subtotal + shipping + tax). Re-fetch to get the post-tax amount for display.
-  let final = intent;
-  if (env.STRIPE_TAX_ENABLED === 'true') {
-    try {
-      final = await retrievePaymentIntent(env.STRIPE_SECRET_KEY, intent.id);
-    } catch {
-      // Non-fatal — display original amount, tax will still be charged correctly.
-      final = intent;
-    }
-  }
-
-  const total_cents = final.amount;
-  const tax_cents = total_cents - pre_tax_cents;
+  // Tax is $0 until Stripe Tax is activated and the Tax Calculation flow is wired.
+  const total_cents = intent.amount;
+  const tax_cents = 0;
 
   return jsonResponse({
-    clientSecret: final.client_secret,
-    orderId: final.id,
+    clientSecret: intent.client_secret,
+    orderId: intent.id,
     amount: {
       subtotal_cents,
       shipping_cents,
