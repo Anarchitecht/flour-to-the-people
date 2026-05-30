@@ -1037,6 +1037,31 @@ html, body { height: 100vh; overflow: hidden; }
   .mbg { padding: 6px; }
   .mbd { padding: 12px; }
   .modal { max-height: 92vh; max-height: 92dvh; }
+
+  /* Footer: stack the 3-column grid (was 1.4fr 1fr 1fr — squeezed email to ~95px and clipped it).
+     Single column gives the email its full row width (~320-360px), centers everything for balance. */
+  .footer { padding: 20px 16px 12px; }
+  .fg2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .fb2 { text-align: center; }
+  .fc { text-align: center; }
+  .fc ul { list-style: none; padding: 0; }
+  .logo small {
+    display: block !important;
+    margin-top: 5px;
+  }
+  /* Allow the email to wrap if a future address ever exceeds row width */
+  .fc address { overflow-wrap: anywhere; }
+  /* Bottom row: stack the copyright and tagline (were flex space-between, smushed horizontally) */
+  .fbot {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    align-items: center;
+  }
 }
 
 
