@@ -1011,6 +1011,35 @@ html, body { height: 100vh; overflow: hidden; }
 }
 
 
+/* ── MOBILE FIXES: contact page stacking, dynamic viewport height, checkout modal width ── */
+@media (max-width: 700px) {
+  /* Use dynamic viewport height where supported so the topbar isn't pushed off-screen
+     by iOS Safari's URL bar. Falls back to 100vh on older browsers. */
+  .shell { height: 100vh; height: 100dvh; }
+
+  /* Contact page: stack the 2-column grid; without this the info and form each get
+     half the phone width and the form fields become unusable */
+  .cgrid { grid-template-columns: 1fr; }
+  .cinfo { padding: 14px; }
+  .cinfo h2 { font-size: 1.2rem; margin-bottom: 8px; }
+  .ci { padding: 7px 0; gap: 8px; }
+  .cv { font-size: 13px; }
+  .fw { padding: 14px; }
+  .fw h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .fg { margin-bottom: 6px; }
+  .fg textarea { min-height: 48px; }
+  .ph { padding: 14px 16px 12px; }
+  .ph h1 { font-size: 1.5rem; }
+  .ph p { font-size: 13px; margin-top: 4px; }
+
+  /* Checkout modal: reclaim the 56px the backdrop+modal padding was eating, give
+     Stripe's Payment Element more horizontal room to render cleanly */
+  .mbg { padding: 6px; }
+  .mbd { padding: 12px; }
+  .modal { max-height: 92vh; max-height: 92dvh; }
+}
+
+
 /* ── MANIFESTO COLLAPSE — body hidden by default, click card to toggle ── */
 .manifesto-item { cursor: pointer; }
 .manifesto-body {
@@ -1550,7 +1579,14 @@ function scrollToFlours(){
   closeCart();
   setTimeout(function(){
     var a=document.getElementById('filt-anchor');
-    if(a)a.scrollIntoView({behavior:'smooth',block:'start'});
+    var scroller=document.getElementById('scroll');
+    if(!a||!scroller)return;
+    // Scroll the .scroll container directly (not scrollIntoView) — iOS Safari has a
+    // long-standing bug where scrollIntoView scrolls the document instead of the
+    // nearest scrollable ancestor, which pushes the topbar off screen.
+    var aTop=a.getBoundingClientRect().top;
+    var sTop=scroller.getBoundingClientRect().top;
+    scroller.scrollTo({top:scroller.scrollTop+(aTop-sTop),behavior:'smooth'});
   },60);
 }
 function go(n,t,eco){
@@ -1670,7 +1706,7 @@ async function goToPayment(e){
         },
       },
     });
-    var pe=stripeElements.create('payment',{layout:'tabs'});
+    var pe=stripeElements.create('payment',{layout:'accordion'});
     pe.mount('#payment-element');
 
     document.getElementById('cform').style.display='none';
