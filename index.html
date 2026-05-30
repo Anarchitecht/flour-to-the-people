@@ -832,6 +832,15 @@ html, body { height: 100vh; overflow: hidden; }
   .pc:nth-child(4n)   { --pc-h: 295deg; }  /* purple (comp of 4n+2) */
 }
 
+/* ── MOBILE: product grid to single column ──
+   At 2 columns on a phone each card is ~180px wide, which crushes the ingredient
+   descriptions into narrow stacks. Single column below 600px gives each card the
+   full viewport width so text rows are longer and easier to read. Tablets (>600px)
+   keep 2 columns where there's room for comfortable card widths. */
+@media (max-width: 600px) {
+  .pgrid { grid-template-columns: 1fr; gap: 12px; }
+}
+
 
 /* ── UNIFIED TOPBAR — tabs dominate, bordered, black text when active ── */
 .topbar {
