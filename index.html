@@ -1539,9 +1539,9 @@ ol.rc-list li::before {
   <div class="fw"><h3>Send a Message</h3>
     <div class="fr"><div class="fg"><label for="ffirst">First Name<span class="req" aria-label="required">*</span></label><input id="ffirst" type="text" placeholder="Jane" aria-required="true"></div><div class="fg"><label for="flast">Last Name<span class="req" aria-label="required">*</span></label><input id="flast" type="text" placeholder="Smith" aria-required="true"></div></div>
     <div class="fg"><label for="femail2">Email Address<span class="req" aria-label="required">*</span></label><input id="femail2" type="email" placeholder="you@example.com" aria-required="true"></div>
-    <div class="fg"><label for="fsubject">Subject</label><select><option>Order or product question</option><option>Product availability</option><option>Wholesale / bulk inquiry</option><option>About the mill</option><option>Mill visit or tour</option></select></div>
+    <div class="fg"><label for="fsubject">Subject</label><select id="fsubject"><option>Order or product question</option><option>Product availability</option><option>Wholesale / bulk inquiry</option><option>About the mill</option></select></div>
     <div class="fg"><label for="fmessage">Message<span class="req" aria-label="required">*</span></label><textarea id="fmessage" placeholder="What would you like to know?" aria-required="true"></textarea></div>
-    <button class="btn btn-a btn-fw" style="background:var(--r);border-color:var(--r)">Send Message →</button>
+    <button class="btn btn-a btn-fw" style="background:var(--r);border-color:var(--r)" onclick="sendContactMessage()">Send Message →</button>
   </div>
 </div></div></div>
 
@@ -1602,6 +1602,26 @@ ol.rc-list li::before {
 
 <script>
 var cart=[],tabs=document.querySelectorAll('.tab');
+function sendContactMessage(){
+  var first=(document.getElementById('ffirst').value||'').trim();
+  var last=(document.getElementById('flast').value||'').trim();
+  var email=(document.getElementById('femail2').value||'').trim();
+  var subject=document.getElementById('fsubject').value;
+  var message=(document.getElementById('fmessage').value||'').trim();
+  if(!first||!last||!email||!message){
+    alert('Please fill in your name, email, and message before sending.');
+    return;
+  }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    alert('Please enter a valid email address.');
+    return;
+  }
+  var body='From: '+first+' '+last+' ('+email+')\n\n'+message;
+  var url='mailto:FlourtothePeople@protonmail.com'
+    +'?subject='+encodeURIComponent(subject+' — '+first+' '+last)
+    +'&body='+encodeURIComponent(body);
+  window.location.href=url;
+}
 function scrollToFlours(){
   if(!document.getElementById('pg-home').classList.contains('on')){
     document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
