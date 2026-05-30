@@ -983,6 +983,34 @@ html, body { height: 100vh; overflow: hidden; }
 }
 
 
+/* ── MOBILE: prevent cart button from impinging on the rightmost tab ──
+   On narrow viewports the 5 tabs hit their content-minimum width while the
+   cart button is flex-shrink:0, so the right tab gets crushed under the cart.
+   Compress everything proportionally; hide the $ total on the very narrowest. */
+@media (max-width: 480px) {
+  .topbar { padding: 4px 6px; gap: 4px; }
+  .topbar-nav { gap: 2px; }
+  .topbar-nav .tab {
+    font-size: 12px !important;
+    padding: 0 .3em !important;
+    letter-spacing: .02em !important;
+    border-width: 1px !important;
+  }
+  .topbar > .cbtn {
+    font-size: 12px !important;
+    padding: 0 .5em !important;
+    gap: 3px;
+    letter-spacing: .04em;
+  }
+  .topbar > .cbtn .cart-sep { margin: 0 .1em; }
+}
+@media (max-width: 380px) {
+  /* Very narrow: drop the dollar total — keep CART + count only, full total visible inside cart panel */
+  .topbar > .cbtn .cart-sep,
+  .topbar > .cbtn #cb-total { display: none; }
+}
+
+
 /* ── MANIFESTO COLLAPSE — body hidden by default, click card to toggle ── */
 .manifesto-item { cursor: pointer; }
 .manifesto-body {
