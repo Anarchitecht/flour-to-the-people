@@ -7,13 +7,14 @@
 <title>The Cowhouse Nursery — Gatesville, Texas</title>
 <meta name="description" content="Appointment-based family plant nursery in Gatesville, Texas focused on Texas natives and ecologically friendly non-invasive plants for the Cross Timbers and Blackland Prairie.">
 <style>
-:root{--tri-a:#ff2d55;--tri-b:#55ff2d;--tri-c:#2d55ff;--ink:#111;--paper:#fffdf2}
+:root{--ink:#111;--paper:#fffdf2}
+@property --h{syntax:"<number>";inherits:true;initial-value:348}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive}
 .screen::before{content:"✨ 🐝🦋 🌱 🐝 🌼 🌵 🦋 ✨ 🐝🦋 🌱 🐝 🌼 🌵 🦋";position:absolute;z-index:10001;top:0;left:-30%;width:160%;padding:.45rem max(.6rem,env(safe-area-inset-left));white-space:nowrap;font-size:1.35rem;background:transparent;color:#fff;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff;box-shadow:none;animation:marquee 11s linear infinite;pointer-events:none}
 .screen::after{content:"";position:absolute;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.18) 0 1px,rgba(255,255,255,.035) 1px 2px);mix-blend-mode:multiply;animation:tear .18s steps(2,end) infinite;opacity:.62}
-.screen{position:relative;min-height:100%;overflow:hidden;background:repeating-linear-gradient(45deg,var(--tri-a) 0 30px,var(--tri-b) 30px 60px,var(--tri-c) 60px 90px);opacity:1;filter:blur(.33px);animation:focusIn 1s cubic-bezier(.16,.84,.28,1) both;will-change:filter,opacity;transform:translateZ(0);isolation:isolate}
+.screen{--h:348;--tri-a:hsl(var(--h) 100% 59%);--tri-b:hsl(calc(var(--h) + 120) 100% 59%);--tri-c:hsl(calc(var(--h) + 240) 100% 59%);position:relative;min-height:100%;overflow:hidden;background:repeating-linear-gradient(45deg,var(--tri-a) 0 30px,var(--tri-b) 30px 60px,var(--tri-c) 60px 90px);opacity:1;filter:blur(.33px);animation:focusIn 1s cubic-bezier(.16,.84,.28,1) both,triadHue 18s linear infinite;will-change:filter,opacity;transform:translateZ(0);isolation:isolate}
 a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;font-weight:900;overflow-wrap:anywhere}
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
@@ -37,6 +38,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .falling{position:fixed;z-index:20;top:-2rem;font-size:1.8rem;pointer-events:none;animation:fall linear forwards}
 .footer{text-align:center;font-family:Arial,sans-serif;font-weight:900;margin:2rem 0;background:#fff;border:5px dashed #000;padding:1rem;box-shadow:8px 8px 0 var(--tri-a);overflow-wrap:anywhere}
 @keyframes focusIn{0%{opacity:0;filter:blur(100px)}100%{opacity:1;filter:blur(.33px)}}
+@keyframes triadHue{to{--h:708}}
 @keyframes rainbowText{to{background-position:300% 0}}
 @keyframes wobble{0%,100%{transform:rotate(-1deg) scale(1)}50%{transform:rotate(1deg) scale(1.02)}}
 @keyframes spin{to{transform:rotate(372deg)}}
