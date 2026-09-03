@@ -7,7 +7,6 @@
 <title>The Cowhouse Nursery — Gatesville, Texas</title>
 <meta name="description" content="Appointment-based family plant nursery in Gatesville, Texas focused on Texas natives and ecologically friendly non-invasive plants for the Cross Timbers and Blackland Prairie.">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Rubik+Beastly&display=swap");
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
 @property --stroke{syntax:"<length>";inherits:true;initial-value:3px}
@@ -21,14 +20,14 @@ a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;fo
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{--stroke:3px;position:relative;margin:.1rem 0;font-family:"Rubik Beastly",cursive;font-size:clamp(4.5rem,11.5vw,9.5rem);font-weight:400;font-style:normal;font-kerning:auto;font-feature-settings:normal;line-height:.9;text-transform:none;letter-spacing:normal;color:hsl(calc(var(--h) + 132) 100% 54%);filter:none;overflow-wrap:anywhere;white-space:normal;animation:strokePulse 1.35s ease-in-out 3s infinite alternate}
+.hero h1{--stroke:3px;position:relative;margin:.1rem 0;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:clamp(4.5rem,11.5vw,9.5rem);font-weight:400;font-style:normal;font-kerning:auto;font-feature-settings:normal;line-height:.9;text-transform:none;letter-spacing:normal;color:hsl(calc(var(--h) + 132) 100% 54%);filter:none;overflow-wrap:anywhere;white-space:normal;animation:strokePulse 1.35s ease-in-out 3s infinite alternate}
 .hero h1::before{content:attr(data-text);position:absolute;inset:0;z-index:0;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:var(--stroke) hsl(calc(var(--h) + 312) 100% 54%);font:inherit;letter-spacing:inherit;line-height:inherit;text-align:inherit;white-space:normal;pointer-events:none;opacity:0;animation:titleFinalReveal .08s linear 2.94s forwards}
 .title-text{position:relative;z-index:1;color:hsl(calc(var(--h) + 132) 100% 54%);-webkit-text-fill-color:hsl(calc(var(--h) + 132) 100% 54%);opacity:0;animation:titleFinalReveal .08s linear 2.94s forwards}
 .title-arrivals{position:absolute;inset:0;z-index:2;display:block;font:inherit;letter-spacing:inherit;line-height:inherit;text-align:inherit;white-space:normal;pointer-events:none;animation:titleArrivalsGone .08s linear 2.94s forwards}
 .title-letter{display:inline-block;opacity:0;color:hsl(calc(var(--h) + 132) 100% 54%);-webkit-text-fill-color:hsl(calc(var(--h) + 132) 100% 54%);transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.15);transform-origin:50% 50%;animation:letterRoll 1.1s cubic-bezier(.16,.84,.28,1.15) var(--d) both;will-change:transform,opacity}
 .title-space{display:inline-block;width:.28em}
 .sub{font-size:clamp(1.2rem,3vw,2rem);font-weight:900;background:#000;color:#fff;padding:.7rem 1rem;display:inline-block;max-width:100%;overflow-wrap:anywhere;transform:rotate(1.5deg);box-shadow:8px 8px 0 var(--tri-c);animation:blinkShadow 1.1s steps(2,end) infinite}
-.stamp{position:absolute;right:2%;top:8%;width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--tri-b);border:7px dashed var(--tri-a);font-size:1.1rem;font-weight:900;transform:rotate(12deg);animation:spin 8s linear infinite}
+.stamp{position:relative;right:auto;top:auto;width:150px;height:150px;margin:.6rem auto .85rem;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--tri-b);border:7px dashed var(--tri-a);font-size:1.1rem;font-weight:900;transform:rotate(12deg);animation:spin 8s linear infinite}
 .pollinators{font-size:clamp(4.5rem,8vw,6.5rem);display:block;margin:.25rem auto .45rem;animation:float 2.2s ease-in-out infinite,spinTiny 7s linear infinite}
 .ticker{margin:1.5rem 0;border:7px double #000;background:#fff;color:#000;overflow:hidden;white-space:nowrap;padding:.55rem;font-size:1.2rem;font-weight:900;box-shadow:9px 9px 0 var(--tri-a)}
 .ticker span{display:inline-block;padding-left:100%;animation:marquee 18s linear infinite}
