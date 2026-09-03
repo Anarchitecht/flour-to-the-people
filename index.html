@@ -132,7 +132,7 @@ const smallScreen=matchMedia('(max-width:760px)');
 const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)');
 function drop(){
  if(reduceMotion.matches)return;
- const e=document.createElement('span');e.className='falling';e.textContent=junk[Math.floor(Math.random()*junk.length)];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(3+Math.random()*6)+'s';e.style.filter=`hue-rotate(${Math.random()*360}deg)`;document.body.appendChild(e);setTimeout(()=>e.remove(),9500)
+ const e=document.createElement('span');e.className='falling';e.textContent=junk[Math.floor(Math.random()*junk.length)];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(3+Math.random()*6)+'s';e.style.filter=`hue-rotate(${Math.random()*360}deg)`;document.querySelector('.screen').appendChild(e);setTimeout(()=>e.remove(),9500)
 }
 setInterval(drop,smallScreen.matches?850:520);
 setInterval(()=>{
