@@ -13,14 +13,16 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive}
-.screen::before{content:"✨ 🐝🦋 🌱 🐝 🌼 🌵 🦋 ✨ 🐝🦋 🌱 🐝 🌼 🌵 🦋";position:absolute;z-index:10001;top:0;left:-30%;width:160%;padding:.45rem max(.6rem,env(safe-area-inset-left));white-space:nowrap;font-size:1.35rem;background:transparent;color:#fff;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff;box-shadow:none;animation:marquee 11s linear infinite;pointer-events:none}
+.emoji-loop{position:absolute;z-index:10001;top:0;left:0;width:100%;overflow:hidden;pointer-events:none;background:transparent;color:#fff;font-size:1.35rem;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff}
+.emoji-track{display:flex;width:max-content;will-change:transform;animation:emojiPac 11s linear infinite}
+.emoji-run{flex:none;white-space:nowrap;padding:.45rem 1.1rem .45rem 0}
 .screen::after{content:"";position:absolute;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.18) 0 1px,rgba(255,255,255,.035) 1px 2px);mix-blend-mode:multiply;animation:tear .18s steps(2,end) infinite;opacity:.62}
 .screen{--h:348;--tri-a:hsl(var(--h) 100% 59%);--tri-b:hsl(calc(var(--h) + 120) 100% 59%);--tri-c:hsl(calc(var(--h) + 240) 100% 59%);position:relative;min-height:100%;overflow:hidden;background:repeating-linear-gradient(45deg,var(--tri-a) 0 30px,var(--tri-b) 30px 60px,var(--tri-c) 60px 90px);opacity:1;filter:blur(.33px);animation:focusIn 1s cubic-bezier(.16,.84,.28,1) both,triadHue 36s linear infinite;will-change:filter,opacity;transform:translateZ(0);isolation:isolate}
 a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;font-weight:900;overflow-wrap:anywhere}
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{--stroke:3px;position:relative;margin:.1rem 0;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:clamp(4.5rem,11.5vw,9.5rem);font-weight:400;font-style:normal;font-kerning:auto;font-feature-settings:normal;line-height:.9;text-transform:none;letter-spacing:normal;color:hsl(calc(var(--h) + 132) 100% 54%);filter:none;overflow-wrap:anywhere;white-space:normal;animation:strokePulse 1.35s ease-in-out 3s infinite alternate}
+.hero h1{--stroke:3px;position:relative;margin:.1rem 0;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:clamp(4.5rem,11.5vw,9.5rem);font-weight:400;font-style:normal;font-kerning:auto;font-feature-settings:normal;line-height:.9;text-transform:none;letter-spacing:normal;color:hsl(calc(var(--h) + 132) 100% 54%);filter:drop-shadow(7px 7px 0 #fff);overflow-wrap:anywhere;white-space:normal;animation:strokePulse 1.35s ease-in-out 3s infinite alternate,wobble 2.4s ease-in-out 3s infinite}
 .hero h1::before{content:attr(data-text);position:absolute;inset:0;z-index:0;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:var(--stroke) hsl(calc(var(--h) + 312) 100% 54%);font:inherit;letter-spacing:inherit;line-height:inherit;text-align:inherit;white-space:normal;pointer-events:none;opacity:0;animation:titleFinalReveal .08s linear 2.94s forwards}
 .title-text{position:relative;z-index:1;color:hsl(calc(var(--h) + 132) 100% 54%);-webkit-text-fill-color:hsl(calc(var(--h) + 132) 100% 54%);opacity:0;animation:titleFinalReveal .08s linear 2.94s forwards}
 .title-arrivals{position:absolute;inset:0;z-index:2;display:block;font:inherit;letter-spacing:inherit;line-height:inherit;text-align:inherit;white-space:normal;pointer-events:none;animation:titleArrivalsGone .08s linear 2.94s forwards}
@@ -54,15 +56,17 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 @keyframes spin{to{transform:rotate(372deg)}}
 @keyframes spinTiny{50%{transform:rotate(5deg) scale(1.08)}}
 @keyframes float{50%{translate:0 -14px}}
+@keyframes emojiPac{to{transform:translateX(-50%)}}
 @keyframes marquee{to{transform:translateX(-100%)}}
 @keyframes blinkShadow{50%{box-shadow:-8px 8px 0 var(--tri-a)}}
 @keyframes tear{0%{clip-path:inset(0)}50%{clip-path:polygon(0 0,100% 0,100% 48%,0 51%,0 100%,100% 100%,100% 53%,0 50%)}}
 @keyframes fall{to{transform:translateY(115vh) rotate(900deg);opacity:.2}}
 @media(max-width:760px){
- .screen::before{font-size:1rem;padding:.35rem 0}
+ .emoji-loop{font-size:1rem}
+ .emoji-run{padding-top:.35rem;padding-bottom:.35rem}
  .wrap{width:min(94vw,680px);margin-top:3.45rem}
  .hero{padding:1.4rem .75rem 1.8rem;border-width:7px;border-radius:24px;box-shadow:10px 10px 0 #000,-7px -7px 0 #fff,0 0 30px var(--tri-a)}
- .hero h1{--stroke:2px;font-size:clamp(3.8rem,20vw,6.6rem);line-height:.9;margin:.15rem -.15rem .1rem}
+ .hero h1{--stroke:2px;font-size:clamp(3.8rem,20vw,6.6rem);line-height:.9;margin:.15rem -.15rem .1rem;filter:drop-shadow(4px 4px 0 #fff)}
  .sub{display:block;font-size:1rem;margin:.8rem auto 0;line-height:1.35;padding:.65rem .55rem;box-shadow:5px 5px 0 var(--tri-c)}
  .stamp{position:static;margin:.6rem auto;width:118px;height:118px;font-size:.9rem;border-width:5px}
  .pollinators{font-size:4rem;margin:.2rem auto .4rem}
@@ -86,6 +90,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 </head>
 <body>
 <div class="screen">
+<div class="emoji-loop" aria-hidden="true"><div class="emoji-track"><span class="emoji-run">✨ 🐝 🦋 🌱 🐝 🌼 🌵 🦋 ✨ 🌿 🐝 🦋 🌱 🌼 🐝 🌵 🦋 🌿 ✨ 🐝 🦋 🌱 🌼 🌵 🐝 🦋 🌿 </span><span class="emoji-run">✨ 🐝 🦋 🌱 🐝 🌼 🌵 🦋 ✨ 🌿 🐝 🦋 🌱 🌼 🐝 🌵 🦋 🌿 ✨ 🐝 🦋 🌱 🌼 🌵 🐝 🦋 🌿 </span></div></div>
 <main class="wrap">
 <section class="hero">
 <h1 data-text="The Cowhouse Nursery"><span class="title-text">The Cowhouse Nursery</span><span class="title-arrivals" aria-hidden="true"><span class="title-letter" aria-hidden="true" style="--x:-65vw;--y:-35vh;--r:-1080deg;--d:1.00s">T</span><span class="title-letter" aria-hidden="true" style="--x:60vw;--y:-30vh;--r:900deg;--d:1.05s">h</span><span class="title-letter" aria-hidden="true" style="--x:-55vw;--y:40vh;--r:-900deg;--d:1.10s">e</span><span class="title-space" aria-hidden="true">&nbsp;</span><span class="title-letter" aria-hidden="true" style="--x:70vw;--y:25vh;--r:1080deg;--d:1.15s">C</span><span class="title-letter" aria-hidden="true" style="--x:-70vw;--y:15vh;--r:-1260deg;--d:1.20s">o</span><span class="title-letter" aria-hidden="true" style="--x:10vw;--y:-55vh;--r:900deg;--d:1.25s">w</span><span class="title-letter" aria-hidden="true" style="--x:-20vw;--y:55vh;--r:-1080deg;--d:1.30s">h</span><span class="title-letter" aria-hidden="true" style="--x:65vw;--y:-45vh;--r:1260deg;--d:1.35s">o</span><span class="title-letter" aria-hidden="true" style="--x:-65vw;--y:-15vh;--r:-900deg;--d:1.40s">u</span><span class="title-letter" aria-hidden="true" style="--x:55vw;--y:45vh;--r:1080deg;--d:1.45s">s</span><span class="title-letter" aria-hidden="true" style="--x:-40vw;--y:50vh;--r:-1260deg;--d:1.50s">e</span><span class="title-space" aria-hidden="true">&nbsp;</span><span class="title-letter" aria-hidden="true" style="--x:70vw;--y:-20vh;--r:900deg;--d:1.55s">N</span><span class="title-letter" aria-hidden="true" style="--x:-70vw;--y:35vh;--r:-1080deg;--d:1.60s">u</span><span class="title-letter" aria-hidden="true" style="--x:45vw;--y:-50vh;--r:1260deg;--d:1.65s">r</span><span class="title-letter" aria-hidden="true" style="--x:-50vw;--y:-45vh;--r:-900deg;--d:1.70s">s</span><span class="title-letter" aria-hidden="true" style="--x:60vw;--y:35vh;--r:1080deg;--d:1.75s">e</span><span class="title-letter" aria-hidden="true" style="--x:-60vw;--y:20vh;--r:-1260deg;--d:1.80s">r</span><span class="title-letter" aria-hidden="true" style="--x:0vw;--y:-60vh;--r:1080deg;--d:1.85s">y</span></span></h1>
