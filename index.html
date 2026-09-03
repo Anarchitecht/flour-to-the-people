@@ -10,8 +10,8 @@
 :root{--hot:#ff00aa;--acid:#c8ff00;--cyan:#00f7ff;--orange:#ff6a00;--purple:#8b00ff;--ink:#111;--paper:#fffdf2}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-html::after{content:"";position:fixed;inset:0;z-index:10001;pointer-events:none;background:rgba(0,0,0,0);-webkit-backdrop-filter:blur(.33px);backdrop-filter:blur(.33px);animation:focusLens 3s cubic-bezier(.16,.84,.28,1) both}
-body{margin:0;overflow-x:hidden;min-width:0;background:repeating-linear-gradient(45deg,#fffb00 0 22px,#ff7ad9 22px 44px,#7df9ff 44px 66px,#8cff7a 66px 88px);color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive;animation:siteFade 3s ease-out both,hue 18s linear infinite}
+html::after{content:"";position:fixed;inset:0;z-index:10001;pointer-events:none;background:rgba(0,0,0,0);-webkit-backdrop-filter:blur(.33px);backdrop-filter:blur(.33px);animation:focusLens 1s cubic-bezier(.16,.84,.28,1) both}
+body{margin:0;overflow-x:hidden;min-width:0;background:repeating-linear-gradient(45deg,#fffb00 0 22px,#ff7ad9 22px 44px,#7df9ff 44px 66px,#8cff7a 66px 88px);color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive;animation:siteFade 1s ease-out both,hue 18s linear infinite}
 body::before{content:"🌈 ✨ 🐝🦋 🌱 🐝 🌼 🌵 🦋 🌈 ✨ 🐝🦋 🌱 🐝 🌼 🌵 🦋";position:fixed;z-index:9999;top:0;left:-30%;width:160%;padding:.45rem max(.6rem,env(safe-area-inset-left));white-space:nowrap;font-size:1.35rem;background:transparent;color:#fff;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff;box-shadow:none;animation:marquee 11s linear infinite;pointer-events:none}
 body::after{content:"";position:fixed;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.18) 0 1px,rgba(255,255,255,.035) 1px 2px);mix-blend-mode:multiply;animation:tear .18s steps(2,end) infinite;opacity:.62}
 a{color:#003cff;text-decoration-thickness:4px;text-decoration-style:wavy;font-weight:900;overflow-wrap:anywhere}
@@ -51,7 +51,7 @@ a:hover{color:#ff008c;text-shadow:3px 3px 0 #fff,-3px -3px 0 #00ffff;filter:blur
 @keyframes randomBlur{0%,84%,100%{filter:none}85%{filter:blur(1.7px) saturate(2)}88%{filter:contrast(2) hue-rotate(90deg)}}
 @keyframes fall{to{transform:translateY(115vh) rotate(900deg);opacity:.2}}
 @media(max-width:760px){
- body{animation-duration:28s}
+ body{animation-duration:1s,28s}
  body::before{font-size:1rem;padding:.35rem 0}
  .wrap{width:min(94vw,680px);margin-top:3.45rem}
  .hero{padding:1.4rem .75rem 1.8rem;border-width:7px;border-radius:24px;box-shadow:10px 10px 0 #000,-7px -7px 0 #fff,0 0 30px #ff00cc}
