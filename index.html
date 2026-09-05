@@ -15,13 +15,13 @@ body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);fon
 .emoji-loop{position:absolute;z-index:10001;top:0;left:0;width:100%;overflow:hidden;pointer-events:none;background:transparent;color:#fff;font-size:1.35rem;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff}
 .emoji-track{display:flex;width:max-content;will-change:transform;animation:emojiPac 11s linear infinite}
 .emoji-run{flex:none;white-space:nowrap;padding:.45rem 1.1rem .45rem 0}
-.screen::after{content:"";position:absolute;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,#000 0 1px,transparent 1px 2px);mix-blend-mode:normal;animation:tear .18s steps(2,end) infinite;opacity:1}
+.screen::after{content:"";position:absolute;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,#000 0 1px,transparent 1px 2px);mix-blend-mode:normal;opacity:1}
 .screen{--h:348;--tri-a:hsl(var(--h) 100% 59%);--tri-b:hsl(calc(var(--h) + 120) 100% 59%);--tri-c:hsl(calc(var(--h) + 240) 100% 59%);position:relative;min-height:100%;overflow:hidden;background:repeating-linear-gradient(45deg,var(--tri-a) 0 30px,var(--tri-b) 30px 60px,var(--tri-c) 60px 90px);opacity:1;filter:blur(.33px);animation:focusIn 1s cubic-bezier(.16,.84,.28,1) both,triadHue 36s linear infinite;will-change:filter,opacity;transform:translateZ(0);isolation:isolate}
 a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;font-weight:900;overflow-wrap:anywhere}
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(75ch,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
-.hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:min(13vw,8rem);font-weight:900;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite}
+.hero{position:relative;overflow:hidden;container-type:inline-size;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
+.hero h1{position:relative;width:92%;max-width:100%;margin:.15rem auto 1.25rem;padding:.14em .03em .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:clamp(2.35rem,14cqw,7.5rem);font-weight:900;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{position:relative;z-index:-2;display:block;visibility:hidden;pointer-events:none}
 .title-stroke{position:absolute;inset:.14em 0 .26em;z-index:0;display:block;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;mix-blend-mode:normal;pointer-events:none}
@@ -59,7 +59,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 @keyframes focusIn{0%{opacity:0;filter:blur(100px)}100%{opacity:1;filter:blur(.33px)}}
 @keyframes triadHue{to{--h:708}}
 @keyframes rainbowText{to{background-position:300% 0}}
-@keyframes wobble{0%,100%{transform:rotate(-1.2deg) scale(1)}50%{transform:rotate(1.4deg) scale(1.025)}}
+@keyframes wobble{0%,100%{transform:rotate(-1deg) scale(1)}50%{transform:rotate(1.1deg) scale(1.012)}}
 @keyframes rgbDriftR{0%,6%{transform:translate(0,0) rotate(0)}22%{transform:translate(3px,1px) rotate(.12deg)}47%{transform:translate(-2px,4px) rotate(-.1deg)}69%{transform:translate(4px,-3px) rotate(.18deg)}88%{transform:translate(-2px,1px) rotate(-.12deg)}100%{transform:translate(0,0) rotate(0)}}
 @keyframes rgbDriftG{0%,6%{transform:translate(0,0) rotate(0)}18%{transform:translate(-3px,-1px) rotate(-.16deg)}41%{transform:translate(4px,-2px) rotate(.1deg)}63%{transform:translate(-1px,3px) rotate(-.12deg)}84%{transform:translate(2px,0) rotate(.18deg)}100%{transform:translate(0,0) rotate(0)}}
 @keyframes rgbDriftB{0%,6%{transform:translate(0,0) rotate(0)}20%{transform:translate(2px,-3px) rotate(.14deg)}45%{transform:translate(-3px,2px) rotate(.2deg)}71%{transform:translate(-1px,-3px) rotate(-.16deg)}90%{transform:translate(3px,1px) rotate(.08deg)}100%{transform:translate(0,0) rotate(0)}}
@@ -70,14 +70,13 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 @keyframes emojiPac{to{transform:translateX(-50%)}}
 @keyframes marquee{to{transform:translateX(-100%)}}
 @keyframes blinkShadow{50%{box-shadow:-8px 8px 0 var(--tri-a)}}
-@keyframes tear{0%{clip-path:inset(0)}50%{clip-path:polygon(0 0,100% 0,100% 48%,0 51%,0 100%,100% 100%,100% 53%,0 50%)}}
 @keyframes fall{to{transform:translateY(115vh) rotate(900deg);opacity:.2}}
 @media(max-width:760px){
  .emoji-loop{font-size:1rem}
  .emoji-run{padding-top:.35rem;padding-bottom:.35rem}
  .wrap{width:min(75ch,94vw);margin-top:3.45rem}
  .hero{padding:1.4rem .75rem 1.8rem;border-width:7px;border-radius:24px;box-shadow:10px 10px 0 #000,-7px -7px 0 #fff,0 0 30px var(--tri-a)}
- .hero h1{font-size:min(13vw,5.6rem);line-height:.8;margin:.2rem auto 1.15rem}
+ .hero h1{width:94%;line-height:.8;margin:.2rem auto 1.15rem}
  .sub{display:block;font-size:1rem;margin:.8rem auto 0;line-height:1.35;padding:.65rem .55rem;box-shadow:5px 5px 0 var(--tri-c)}
  .stamp{position:static;margin:.6rem auto;width:118px;height:118px;font-size:.9rem;border-width:5px}
  .pollinators{font-size:4rem;margin:.2rem auto .4rem}
@@ -91,7 +90,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 }
 @media(max-width:390px){
  .wrap{width:92vw}
- .hero h1{font-size:13vw;margin-bottom:1.1rem}
+ .hero h1{width:95%;margin-bottom:1.1rem}
  .card h2{font-size:1.8rem}
  .card p,.card li{font-size:1rem}
  .benefit{padding:.8rem}
