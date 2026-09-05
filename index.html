@@ -7,7 +7,6 @@
 <title>The Cowhouse Nursery — Gatesville, Texas</title>
 <meta name="description" content="Appointment-based family plant nursery in Gatesville, Texas focused on Texas natives and ecologically friendly non-invasive plants for the Cross Timbers and Blackland Prairie.">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
 @property --title-shift{syntax:"<angle>";inherits:true;initial-value:168deg}
@@ -23,12 +22,13 @@ a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;fo
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{--title-shift:168deg;position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Bungee",Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:min(13vw,8rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite,titleHueSync 36s linear infinite}
+.hero h1{--title-shift:168deg;position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:min(13vw,8rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite,titleHueSync 36s linear infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{position:relative;z-index:-2;display:block;visibility:hidden;pointer-events:none}
 .title-stroke{position:absolute;inset:.14em 0 .26em;z-index:0;display:block;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;mix-blend-mode:normal;pointer-events:none}
 .title-stroke .title-line{display:block;white-space:nowrap}
-.rgb-layer{position:absolute;inset:.14em 0 .26em;display:block;pointer-events:none;mix-blend-mode:screen;opacity:1;will-change:transform;filter:hue-rotate(var(--title-shift))}
+.rgb-stack{position:absolute;inset:.14em 0 .26em;z-index:1;display:block;pointer-events:none;filter:hue-rotate(var(--title-shift));isolation:isolate}
+.rgb-layer{position:absolute;inset:0;display:block;pointer-events:none;mix-blend-mode:screen;opacity:1;will-change:transform}
 .rgb-layer .title-line{display:block;white-space:nowrap}
 .rgb-r{z-index:1;color:#ff0000;animation:rgbDriftR 5s linear infinite}
 .rgb-g{z-index:2;color:#00ff00;animation:rgbDriftG 7s linear infinite}
@@ -107,9 +107,11 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 <h1 aria-label="Cowhouse Nursery">
 <span class="title-spacer" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="title-stroke" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
-<span class="rgb-layer rgb-r" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
-<span class="rgb-layer rgb-g" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
-<span class="rgb-layer rgb-b" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
+<span class="rgb-stack" aria-hidden="true">
+<span class="rgb-layer rgb-r"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
+<span class="rgb-layer rgb-g"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
+<span class="rgb-layer rgb-b"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
+</span>
 <span class="title-emoji e1" aria-hidden="true">🐝🌵✨</span>
 <span class="title-emoji e2" aria-hidden="true">🦋🌼🐝</span>
 <span class="title-emoji e3" aria-hidden="true">🌱🍄✨</span>
