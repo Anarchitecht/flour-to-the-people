@@ -23,12 +23,11 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
 .hero h1{position:relative;width:min(100%,980px);margin:.15rem auto .4rem;padding:.14em 0 .2em;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:min(17vw,9.5rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
-.rgb-layer{position:absolute;inset:.14em 0 .2em;display:block;pointer-events:none;mix-blend-mode:screen;opacity:.78;will-change:transform}
+.rgb-layer{position:absolute;inset:.14em 0 .2em;display:block;pointer-events:none;mix-blend-mode:screen;opacity:1;will-change:transform}
 .rgb-layer .title-line{display:block;white-space:nowrap}
-.rgb-r{z-index:1;color:#ff003c;animation:rgbDriftR 13s ease-in-out infinite alternate}
-.rgb-g{z-index:2;color:#00ff72;animation:rgbDriftG 17s ease-in-out infinite alternate-reverse}
-.rgb-b{z-index:3;color:#246bff;animation:rgbDriftB 19s ease-in-out infinite alternate}
-.title-core{position:relative;z-index:4;display:block;color:rgba(255,255,255,.42);text-shadow:1px 1px 0 #000,-1px -1px 0 #000}
+.rgb-r{z-index:1;color:#ff0000;animation:rgbDriftR 13s ease-in-out infinite alternate}
+.rgb-g{z-index:2;color:#00ff00;animation:rgbDriftG 17s ease-in-out infinite alternate-reverse}
+.rgb-b{z-index:3;color:#0000ff;animation:rgbDriftB 19s ease-in-out infinite alternate}
 .title-emoji{position:absolute;z-index:5;font-size:clamp(1.8rem,4vw,3.8rem);line-height:1;pointer-events:none;filter:drop-shadow(2px 2px 0 #000);animation:emojiOrbit 11s ease-in-out infinite alternate}
 .title-emoji.e1{left:-.02em;top:-.25em}
 .title-emoji.e2{right:-.04em;top:-.28em;animation-duration:13s}
@@ -103,7 +102,6 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 <span class="rgb-layer rgb-r" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-g" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-b" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
-<span class="title-core"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="title-emoji e1" aria-hidden="true">🐝🌵✨</span>
 <span class="title-emoji e2" aria-hidden="true">🦋🌼🐝</span>
 <span class="title-emoji e3" aria-hidden="true">🌱🍄✨</span>
