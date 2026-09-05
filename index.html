@@ -9,25 +9,29 @@
 <style>
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
+@property --title-shift{syntax:"<angle>";inherits:true;initial-value:168deg}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive}
 .emoji-loop{position:absolute;z-index:10001;top:0;left:0;width:100%;overflow:hidden;pointer-events:none;background:transparent;color:#fff;font-size:1.35rem;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff}
 .emoji-track{display:flex;width:max-content;will-change:transform;animation:emojiPac 11s linear infinite}
 .emoji-run{flex:none;white-space:nowrap;padding:.45rem 1.1rem .45rem 0}
-.screen::after{content:"";position:absolute;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.18) 0 1px,rgba(255,255,255,.035) 1px 2px);mix-blend-mode:multiply;animation:tear .18s steps(2,end) infinite;opacity:.8}
+.screen::after{content:"";position:absolute;inset:0;z-index:10000;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.18) 0 1px,rgba(255,255,255,.035) 1px 2px);mix-blend-mode:multiply;animation:tear .18s steps(2,end) infinite;opacity:1}
 .screen{--h:348;--tri-a:hsl(var(--h) 100% 59%);--tri-b:hsl(calc(var(--h) + 120) 100% 59%);--tri-c:hsl(calc(var(--h) + 240) 100% 59%);position:relative;min-height:100%;overflow:hidden;background:repeating-linear-gradient(45deg,var(--tri-a) 0 30px,var(--tri-b) 30px 60px,var(--tri-c) 60px 90px);opacity:1;filter:blur(.33px);animation:focusIn 1s cubic-bezier(.16,.84,.28,1) both,triadHue 36s linear infinite;will-change:filter,opacity;transform:translateZ(0);isolation:isolate}
 a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;font-weight:900;overflow-wrap:anywhere}
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{position:relative;width:min(100%,980px);margin:.15rem auto .4rem;padding:.14em 0 .2em;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:min(17vw,9.5rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite}
+.hero h1{--title-shift:168deg;position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-size:min(17vw,9.5rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite,titleHueSync 36s linear infinite}
 .title-line{display:block;white-space:nowrap}
-.rgb-layer{position:absolute;inset:.14em 0 .2em;display:block;pointer-events:none;mix-blend-mode:screen;opacity:1;will-change:transform}
+.title-spacer{position:relative;z-index:-2;display:block;visibility:hidden;pointer-events:none}
+.title-stroke{position:absolute;inset:.14em 0 .26em;z-index:0;display:block;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(3px,.055em,8px) #000;pointer-events:none}
+.title-stroke .title-line{display:block;white-space:nowrap}
+.rgb-layer{position:absolute;inset:.14em 0 .26em;display:block;pointer-events:none;mix-blend-mode:screen;opacity:1;will-change:transform;filter:hue-rotate(var(--title-shift))}
 .rgb-layer .title-line{display:block;white-space:nowrap}
-.rgb-r{z-index:1;color:#ff0000;animation:rgbDriftR 13s ease-in-out infinite alternate}
-.rgb-g{z-index:2;color:#00ff00;animation:rgbDriftG 17s ease-in-out infinite alternate-reverse}
-.rgb-b{z-index:3;color:#0000ff;animation:rgbDriftB 19s ease-in-out infinite alternate}
+.rgb-r{z-index:1;color:#ff0000;animation:rgbDriftR 5s linear infinite}
+.rgb-g{z-index:2;color:#00ff00;animation:rgbDriftG 7s linear infinite}
+.rgb-b{z-index:3;color:#0000ff;animation:rgbDriftB 11s linear infinite}
 .title-emoji{position:absolute;z-index:5;font-size:clamp(1.8rem,4vw,3.8rem);line-height:1;pointer-events:none;filter:drop-shadow(2px 2px 0 #000);animation:emojiOrbit 11s ease-in-out infinite alternate}
 .title-emoji.e1{left:-.02em;top:-.25em}
 .title-emoji.e2{right:-.04em;top:-.28em;animation-duration:13s}
@@ -52,11 +56,12 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .footer{text-align:center;font-family:Arial,sans-serif;font-weight:900;margin:2rem 0;background:#fff;border:5px dashed #000;padding:1rem;box-shadow:8px 8px 0 var(--tri-a);overflow-wrap:anywhere}
 @keyframes focusIn{0%{opacity:0;filter:blur(100px)}100%{opacity:1;filter:blur(.33px)}}
 @keyframes triadHue{to{--h:708}}
+@keyframes titleHueSync{to{--title-shift:528deg}}
 @keyframes rainbowText{to{background-position:300% 0}}
 @keyframes wobble{0%,100%{transform:rotate(-1.2deg) scale(1)}50%{transform:rotate(1.4deg) scale(1.025)}}
-@keyframes rgbDriftR{0%{transform:translate(-7px,-3px) rotate(-.5deg)}37%{transform:translate(5px,2px) rotate(.35deg)}71%{transform:translate(-2px,6px) rotate(-.2deg)}100%{transform:translate(8px,-5px) rotate(.55deg)}}
-@keyframes rgbDriftG{0%{transform:translate(4px,5px) rotate(.3deg)}29%{transform:translate(-6px,-1px) rotate(-.45deg)}67%{transform:translate(7px,-4px) rotate(.2deg)}100%{transform:translate(-3px,6px) rotate(-.35deg)}}
-@keyframes rgbDriftB{0%{transform:translate(2px,-6px) rotate(.4deg)}31%{transform:translate(8px,3px) rotate(-.25deg)}73%{transform:translate(-7px,4px) rotate(.5deg)}100%{transform:translate(-4px,-5px) rotate(-.4deg)}}
+@keyframes rgbDriftR{0%{transform:translate(-9px,-4px) rotate(-.8deg)}17%{transform:translate(7px,3px) rotate(.4deg)}43%{transform:translate(-3px,9px) rotate(-.25deg)}61%{transform:translate(10px,-7px) rotate(.7deg)}83%{transform:translate(-6px,1px) rotate(-.55deg)}100%{transform:translate(-9px,-4px) rotate(-.8deg)}}
+@keyframes rgbDriftG{0%{transform:translate(5px,8px) rotate(.55deg)}13%{transform:translate(-8px,-2px) rotate(-.7deg)}38%{transform:translate(9px,-6px) rotate(.3deg)}57%{transform:translate(-2px,7px) rotate(-.4deg)}79%{transform:translate(6px,0) rotate(.8deg)}100%{transform:translate(5px,8px) rotate(.55deg)}}
+@keyframes rgbDriftB{0%{transform:translate(3px,-8px) rotate(.65deg)}19%{transform:translate(11px,4px) rotate(-.4deg)}41%{transform:translate(-8px,6px) rotate(.75deg)}68%{transform:translate(-4px,-7px) rotate(-.6deg)}89%{transform:translate(7px,2px) rotate(.2deg)}100%{transform:translate(3px,-8px) rotate(.65deg)}}
 @keyframes emojiOrbit{0%{transform:translate(-8px,-5px) rotate(-10deg) scale(.95)}50%{transform:translate(8px,6px) rotate(8deg) scale(1.08)}100%{transform:translate(-4px,9px) rotate(-5deg) scale(1)}}
 @keyframes spin{to{transform:rotate(372deg)}}
 @keyframes spinTiny{50%{transform:rotate(5deg) scale(1.08)}}
@@ -71,7 +76,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
  .emoji-run{padding-top:.35rem;padding-bottom:.35rem}
  .wrap{width:min(94vw,680px);margin-top:3.45rem}
  .hero{padding:1.4rem .75rem 1.8rem;border-width:7px;border-radius:24px;box-shadow:10px 10px 0 #000,-7px -7px 0 #fff,0 0 30px var(--tri-a)}
- .hero h1{font-size:min(17vw,6.6rem);line-height:.8;margin:.2rem auto .45rem}
+ .hero h1{font-size:min(17vw,6.6rem);line-height:.8;margin:.2rem auto 1.15rem}
  .sub{display:block;font-size:1rem;margin:.8rem auto 0;line-height:1.35;padding:.65rem .55rem;box-shadow:5px 5px 0 var(--tri-c)}
  .stamp{position:static;margin:.6rem auto;width:118px;height:118px;font-size:.9rem;border-width:5px}
  .pollinators{font-size:4rem;margin:.2rem auto .4rem}
@@ -85,7 +90,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 }
 @media(max-width:390px){
  .wrap{width:92vw}
- .hero h1{font-size:17vw}
+ .hero h1{font-size:17vw;margin-bottom:1.1rem}
  .card h2{font-size:1.8rem}
  .card p,.card li{font-size:1rem}
  .benefit{padding:.8rem}
@@ -99,6 +104,8 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 <main class="wrap">
 <section class="hero">
 <h1 aria-label="Cowhouse Nursery">
+<span class="title-spacer" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
+<span class="title-stroke" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-r" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-g" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-b" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
