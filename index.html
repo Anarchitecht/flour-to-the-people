@@ -9,7 +9,6 @@
 <style>
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
-@property --title-shift{syntax:"<angle>";inherits:true;initial-value:168deg}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive}
@@ -22,17 +21,19 @@ a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;fo
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{--title-shift:168deg;position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:min(13vw,8rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite,titleHueSync 36s linear infinite}
+.hero h1{position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:min(13vw,8rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{position:relative;z-index:-2;display:block;visibility:hidden;pointer-events:none}
 .title-stroke{position:absolute;inset:.14em 0 .26em;z-index:0;display:block;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;mix-blend-mode:normal;pointer-events:none}
 .title-stroke .title-line{display:block;white-space:nowrap}
-.rgb-stack{position:absolute;inset:.14em 0 .26em;z-index:1;display:block;pointer-events:none;filter:hue-rotate(var(--title-shift));isolation:isolate}
-.rgb-layer{position:absolute;inset:0;display:block;pointer-events:none;mix-blend-mode:screen;opacity:1;will-change:transform}
+.rgb-stack{position:absolute;inset:.14em 0 .26em;z-index:1;display:block;pointer-events:none;isolation:isolate}
+.rgb-layer{position:absolute;inset:0;display:block;pointer-events:none;mix-blend-mode:screen;mix-blend-mode:plus-lighter;opacity:1;will-change:transform}
 .rgb-layer .title-line{display:block;white-space:nowrap}
-.rgb-r{z-index:1;color:#ff0000;animation:rgbDriftR 5s linear infinite}
-.rgb-g{z-index:2;color:#00ff00;animation:rgbDriftG 7s linear infinite}
-.rgb-b{z-index:3;color:#0000ff;animation:rgbDriftB 11s linear infinite}
+.title-scan{position:absolute;inset:.14em 0 .26em;z-index:4;display:block;pointer-events:none;color:transparent;-webkit-text-fill-color:transparent;background:repeating-linear-gradient(to bottom,#000 0 2px,transparent 2px 4px);-webkit-background-clip:text;background-clip:text;opacity:1}
+.title-scan .title-line{display:block;white-space:nowrap}
+.rgb-r{z-index:1;color:hsl(calc(var(--h) + 180) 100% 50%);animation:rgbDriftR 5s linear infinite}
+.rgb-g{z-index:2;color:hsl(calc(var(--h) + 300) 100% 50%);animation:rgbDriftG 7s linear infinite}
+.rgb-b{z-index:3;color:hsl(calc(var(--h) + 420) 100% 50%);animation:rgbDriftB 11s linear infinite}
 .title-emoji{position:absolute;z-index:5;font-size:clamp(1.8rem,4vw,3.8rem);line-height:1;pointer-events:none;filter:drop-shadow(2px 2px 0 #000);animation:emojiOrbit 11s ease-in-out infinite alternate}
 .title-emoji.e1{left:-.02em;top:-.25em}
 .title-emoji.e2{right:-.04em;top:-.28em;animation-duration:13s}
@@ -57,7 +58,6 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .footer{text-align:center;font-family:Arial,sans-serif;font-weight:900;margin:2rem 0;background:#fff;border:5px dashed #000;padding:1rem;box-shadow:8px 8px 0 var(--tri-a);overflow-wrap:anywhere}
 @keyframes focusIn{0%{opacity:0;filter:blur(100px)}100%{opacity:1;filter:blur(.33px)}}
 @keyframes triadHue{to{--h:708}}
-@keyframes titleHueSync{to{--title-shift:528deg}}
 @keyframes rainbowText{to{background-position:300% 0}}
 @keyframes wobble{0%,100%{transform:rotate(-1.2deg) scale(1)}50%{transform:rotate(1.4deg) scale(1.025)}}
 @keyframes rgbDriftR{0%,6%{transform:translate(0,0) rotate(0)}22%{transform:translate(3px,1px) rotate(.12deg)}47%{transform:translate(-2px,4px) rotate(-.1deg)}69%{transform:translate(4px,-3px) rotate(.18deg)}88%{transform:translate(-2px,1px) rotate(-.12deg)}100%{transform:translate(0,0) rotate(0)}}
@@ -112,6 +112,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 <span class="rgb-layer rgb-g"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-b"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 </span>
+<span class="title-scan" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="title-emoji e1" aria-hidden="true">🐝🌵✨</span>
 <span class="title-emoji e2" aria-hidden="true">🦋🌼🐝</span>
 <span class="title-emoji e3" aria-hidden="true">🌱🍄✨</span>
@@ -119,7 +120,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 </h1>
 <div class="pollinators" aria-hidden="true">🐝🦋🌿</div>
 <div class="stamp">APPOINTMENT<br>BASED<br>🌱</div>
-<p class="sub">TEXAS NATIVE PLANTS • ECOLOGICALLY FRIENDLY • FAMILY RUN • GLORIOUSLY LOW-PLASTIC</p>
+<p class="sub">TEXAS NATIVE PLANTS • ECOLOGICALLY FRIENDLY • FAMILY RUN</p>
 </section>
 <div class="ticker" aria-label="nursery highlights"><span>🌼 LESS WATER! &nbsp; 🐝 MORE BUGS! &nbsp; 🦋 MORE BIODIVERSITY! &nbsp; 🌡️ TOUGHER LANDSCAPES! &nbsp; 🏡 BETTER-LOOKING PROPERTY! &nbsp; 🌱 TEXAS PLANTS FOR TEXAS CONDITIONS! &nbsp; 🌼 LESS WATER! &nbsp; 🐝 MORE BUGS!</span></div>
 <section class="grid">
@@ -151,7 +152,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 </article>
 <article class="card">
 <h2>How To Visit</h2>
-<p><strong>By appointment.</strong> This is not a big-box garden center with automatic doors and twelve aisles of fluorescent fertilizer. Contact us before coming out so someone can actually be there.</p>
+<p><strong>By appointment.</strong> Come take a pleasant drive out to the country and visit the nursery, or look for us at local farmers markets. Contact us before heading out so we can make sure someone is here to meet you.</p>
 <p class="address">3734 County Road 137<br>Gatesville, TX 76528</p>
 </article>
 <article class="card contact">
