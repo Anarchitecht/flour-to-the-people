@@ -11,7 +11,7 @@
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);font-family:"Comic Sans MS","Trebuchet MS",cursive}
+body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);font-family:"Comic Sans MS","Comic Sans",cursive;font-weight:900}
 .emoji-loop{position:absolute;z-index:10001;top:0;left:0;width:100%;overflow:hidden;pointer-events:none;background:transparent;color:#fff;font-size:1.35rem;text-shadow:0 2px 0 #000,2px 0 0 #000,-2px 0 0 #000,0 -2px 0 #000,0 0 10px #fff}
 .emoji-track{display:flex;width:max-content;will-change:transform;animation:emojiPac 11s linear infinite}
 .emoji-run{flex:none;white-space:nowrap;padding:.45rem 1.1rem .45rem 0}
@@ -19,9 +19,9 @@ body{margin:0;overflow-x:hidden;min-width:0;background:#111;color:var(--ink);fon
 .screen{--h:348;--tri-a:hsl(var(--h) 100% 59%);--tri-b:hsl(calc(var(--h) + 120) 100% 59%);--tri-c:hsl(calc(var(--h) + 240) 100% 59%);position:relative;min-height:100%;overflow:hidden;background:repeating-linear-gradient(45deg,var(--tri-a) 0 30px,var(--tri-b) 30px 60px,var(--tri-c) 60px 90px);opacity:1;filter:blur(.33px);animation:focusIn 1s cubic-bezier(.16,.84,.28,1) both,triadHue 36s linear infinite;will-change:filter,opacity;transform:translateZ(0);isolation:isolate}
 a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;font-weight:900;overflow-wrap:anywhere}
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
-.wrap{width:min(1100px,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
+.wrap{width:min(75ch,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:min(13vw,8rem);font-weight:400;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite}
+.hero h1{position:relative;width:min(100%,980px);margin:.15rem auto 1.25rem;padding:.14em 0 .26em;font-family:"Comic Sans MS","Comic Sans",cursive;font-size:min(13vw,8rem);font-weight:900;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{position:relative;z-index:-2;display:block;visibility:hidden;pointer-events:none}
 .title-stroke{position:absolute;inset:.14em 0 .26em;z-index:0;display:block;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;mix-blend-mode:normal;pointer-events:none}
@@ -48,14 +48,14 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .card{grid-column:span 6;min-width:0;background:var(--paper);border:6px outset var(--tri-c);border-radius:18px;padding:1.4rem;box-shadow:10px 10px 0 #000;position:relative;overflow:hidden;transform:rotate(var(--r,-.7deg));transition:.18s transform}
 .card:nth-child(even){--r:.8deg;border-color:var(--tri-a)}.card:hover{transform:rotate(0) scale(1.025) translateY(-4px)}
 .card h2{font-family:Impact,sans-serif;text-transform:uppercase;font-size:clamp(1.8rem,4vw,3rem);margin:0 0 .7rem;color:var(--tri-a);-webkit-text-stroke:1px #000;text-shadow:3px 3px 0 var(--tri-b);overflow-wrap:anywhere}
-.card p,.card li{font-family:Arial,Helvetica,sans-serif;font-size:1.05rem;line-height:1.55;font-weight:700;overflow-wrap:anywhere}
+.card p,.card li{font-family:"Comic Sans MS","Comic Sans",cursive;font-size:1.05rem;line-height:1.55;font-weight:900;overflow-wrap:anywhere}
 .badges{display:flex;gap:.55rem;flex-wrap:wrap}.badge{padding:.45rem .7rem;border:3px solid #000;background:var(--tri-a);color:#fff;font-weight:900;box-shadow:4px 4px 0 var(--tri-c);transform:rotate(-2deg)}.badge:nth-child(3n+2){background:var(--tri-b);color:#000;transform:rotate(2deg)}.badge:nth-child(3n){background:var(--tri-c);color:#fff;transform:rotate(-1deg)}
 .benefits{grid-column:span 12;background:linear-gradient(120deg,var(--tri-a),var(--tri-b),var(--tri-c));border-color:#000}
-.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}.benefit{min-width:0;background:rgba(255,255,255,.86);border:4px solid #000;padding:1rem;text-align:center;font-family:Arial,sans-serif;font-weight:900;box-shadow:5px 5px 0 var(--tri-a)}.benefit b{display:block;font-size:1.2rem;margin-top:.3rem}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}.benefit{min-width:0;background:rgba(255,255,255,.86);border:4px solid #000;padding:1rem;text-align:center;font-family:"Comic Sans MS","Comic Sans",cursive;font-weight:900;box-shadow:5px 5px 0 var(--tri-a)}.benefit b{display:block;font-size:1.2rem;margin-top:.3rem}
 .contact{grid-column:span 12;text-align:center;background:#111;color:#fff;border:8px groove var(--tri-b);box-shadow:12px 12px 0 var(--tri-c),-8px -8px 0 var(--tri-a)}.contact h2{color:var(--tri-b);text-shadow:3px 3px 0 var(--tri-a)}.contact a{color:var(--tri-c)}.address{max-width:100%;font-size:1.35rem;background:var(--tri-a);color:#fff;display:inline-block;padding:.6rem .9rem;border:4px solid #fff;transform:rotate(-1deg);overflow-wrap:anywhere}
 .cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin:.5rem;padding:.8rem 1rem;border:5px solid #fff;background:var(--tri-b)!important;color:#000!important;text-decoration:none!important;box-shadow:6px 6px 0 var(--tri-a);font-family:Impact,sans-serif;letter-spacing:.04em;font-size:1.25rem;transform:rotate(-1deg);touch-action:manipulation}.cta:nth-of-type(even){background:var(--tri-c)!important;transform:rotate(1deg)}
 .falling{position:fixed;z-index:20;top:-2rem;font-size:1.8rem;pointer-events:none;animation:fall linear forwards}
-.footer{text-align:center;font-family:Arial,sans-serif;font-weight:900;margin:2rem 0;background:#fff;border:5px dashed #000;padding:1rem;box-shadow:8px 8px 0 var(--tri-a);overflow-wrap:anywhere}
+.footer{text-align:center;font-family:"Comic Sans MS","Comic Sans",cursive;font-weight:900;margin:2rem 0;background:#fff;border:5px dashed #000;padding:1rem;box-shadow:8px 8px 0 var(--tri-a);overflow-wrap:anywhere}
 @keyframes focusIn{0%{opacity:0;filter:blur(100px)}100%{opacity:1;filter:blur(.33px)}}
 @keyframes triadHue{to{--h:708}}
 @keyframes rainbowText{to{background-position:300% 0}}
@@ -75,7 +75,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 @media(max-width:760px){
  .emoji-loop{font-size:1rem}
  .emoji-run{padding-top:.35rem;padding-bottom:.35rem}
- .wrap{width:min(94vw,680px);margin-top:3.45rem}
+ .wrap{width:min(75ch,94vw);margin-top:3.45rem}
  .hero{padding:1.4rem .75rem 1.8rem;border-width:7px;border-radius:24px;box-shadow:10px 10px 0 #000,-7px -7px 0 #fff,0 0 30px var(--tri-a)}
  .hero h1{font-size:min(13vw,5.6rem);line-height:.8;margin:.2rem auto 1.15rem}
  .sub{display:block;font-size:1rem;margin:.8rem auto 0;line-height:1.35;padding:.65rem .55rem;box-shadow:5px 5px 0 var(--tri-c)}
