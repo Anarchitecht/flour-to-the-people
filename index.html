@@ -7,7 +7,6 @@
 <title>The Cowhouse Nursery — Gatesville, Texas</title>
 <meta name="description" content="Appointment-based family plant nursery in Gatesville, Texas focused on Texas natives and ecologically friendly non-invasive plants for the Cross Timbers and Blackland Prairie.">
 <style>
-@font-face{font-family:"Florabet";src:url("./assets/Florabet-title-exact.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
 *{box-sizing:border-box}
@@ -90,6 +89,25 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}.rgb-layer{transform:translateX(var(--depth))!important}.title-emoji{transform:none!important}}
 </style>
+<script>
+(async()=>{
+ try{
+  const parts=await Promise.all([0,1,2,3,4].map(async i=>{
+   const r=await fetch(`./assets/florabet-exact/part-${i}.b64`,{cache:"force-cache"});
+   if(!r.ok)throw new Error(`Florabet part ${i}: ${r.status}`);
+   return (await r.text()).replace(/\s+/g,"");
+  }));
+  const b64=parts.join("");
+  if(b64.length!==65720)throw new Error(`Florabet payload length ${b64.length}`);
+  const face=new FontFace("Florabet",`url(data:font/woff2;base64,${b64})`,{style:"normal",weight:"400"});
+  await face.load();
+  document.fonts.add(face);
+  document.documentElement.classList.add("florabet-loaded");
+ }catch(err){
+  console.error("Florabet failed to load",err);
+ }
+})();
+</script>
 </head>
 <body>
 <div class="screen">
