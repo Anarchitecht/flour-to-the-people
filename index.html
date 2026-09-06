@@ -7,6 +7,7 @@
 <title>The Cowhouse Nursery — Gatesville, Texas</title>
 <meta name="description" content="Appointment-based family plant nursery in Gatesville, Texas focused on Texas natives and ecologically friendly non-invasive plants for the Cross Timbers and Blackland Prairie.">
 <style>
+@font-face{font-family:"Florabet";src:url("./assets/Florabet-title.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
 *{box-sizing:border-box}
@@ -20,7 +21,7 @@ a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;fo
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(75ch,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;container-type:inline-size;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{position:relative;width:84%;margin:.15rem auto 1.25rem;padding:.2em .08em .34em;font-family:"Florabet",serif;font-size:clamp(2.1rem,12cqw,6.5rem);font-weight:400;font-synthesis:none;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite}
+.hero h1{position:relative;width:84%;margin:.15rem auto 1.25rem;padding:.2em .08em .34em;font-family:"Florabet",serif;font-size:clamp(2.1rem,12cqw,6.5rem);font-weight:900;font-synthesis:weight;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{visibility:hidden}
 .title-stroke{position:absolute;inset:.2em 0 .34em;z-index:0;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;pointer-events:none}
@@ -156,35 +157,6 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 </main>
 </div>
 <script>
-async function loadFlorabet(){
- try{
-  const paths=[
-   './assets/florabet/font-0.b64',
-   './assets/florabet/font-1.b64',
-   './assets/florabet/font-2.b64',
-   './assets/florabet/font-3.b64',
-   './assets/florabet/font-4.b64'
-  ];
-  const parts=await Promise.all(paths.map(async (path,index)=>{
-   const response=await fetch(path,{cache:'no-store'});
-   if(!response.ok)throw new Error(`Florabet part ${index}: ${response.status}`);
-   const text=(await response.text()).replace(/\s+/g,'');
-   return index===3?text.slice(0,16000):text;
-  }));
-  const b64=parts.join('');
-  if(b64.length!==64368)throw new Error(`Florabet payload length ${b64.length}`);
-  const binary=atob(b64);
-  const bytes=new Uint8Array(binary.length);
-  for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-  if(String.fromCharCode(...bytes.slice(0,4))!=='wOF2')throw new Error('Florabet WOFF2 signature invalid');
-  const face=new FontFace('Florabet',bytes.buffer,{style:'normal',weight:'400'});
-  await face.load();
-  document.fonts.add(face);
- }catch(error){
-  console.error('Florabet failed to load',error);
- }
-}
-loadFlorabet();
 const junk=['🐝','🦋','🌱','🐝','🦋','🌼','✨','🌵','🍄'];
 const smallScreen=matchMedia('(max-width:760px)');
 const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)');
