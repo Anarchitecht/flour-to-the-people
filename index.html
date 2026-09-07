@@ -22,21 +22,21 @@ a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;fo
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(75ch,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;container-type:inline-size;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{position:relative;width:84%;margin:.15rem auto 1.25rem;padding:.2em .08em .34em;font-family:"Florabet";font-size:clamp(2.1rem,12cqw,6.5rem);font-weight:400;font-synthesis:none;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite}
+.hero h1{position:relative;width:84%;margin:.15rem auto 1.25rem;padding:.2em .08em .34em;font-family:"Florabet";font-size:clamp(1.95rem,10.6cqw,5.9rem);font-weight:400;font-synthesis:none;font-style:normal;line-height:1.45;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{visibility:hidden}
 .title-stroke{position:absolute;inset:.2em 0 .34em;z-index:0;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;pointer-events:none}
 .rgb-stack{position:absolute;inset:.2em 0 .34em;z-index:1;pointer-events:none;isolation:isolate}
 .rgb-layer{position:absolute;inset:0;mix-blend-mode:plus-lighter;will-change:transform;transform-origin:50% 50%;-webkit-text-stroke:.045em currentColor;paint-order:stroke fill;animation:rgbDepthOrbit 12s linear infinite}
-.rgb-r{--depth:3px;z-index:3;color:#f00}
-.rgb-g{--depth:7px;z-index:2;color:#0f0}
-.rgb-b{--depth:11px;z-index:1;color:#00f}
-.title-face{position:absolute;inset:.2em 0 .34em;z-index:4;color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:.018em #000;paint-order:stroke fill;pointer-events:none}
-.title-emoji{position:absolute;z-index:5;font-size:clamp(1.8rem,4vw,3.8rem);line-height:1;pointer-events:none;filter:drop-shadow(2px 2px 0 #000);animation:emojiOrbit 11s ease-in-out infinite alternate}
-.title-emoji.e1{left:-.02em;top:-.25em}
-.title-emoji.e2{right:-.04em;top:-.28em;animation-duration:13s}
-.title-emoji.e3{left:.04em;bottom:-.4em;animation-duration:17s}
-.title-emoji.e4{right:.02em;bottom:-.42em;animation-duration:19s}
+.rgb-r{--depth:1px;z-index:3;color:#f00}
+.rgb-g{--depth:2px;z-index:2;color:#0f0}
+.rgb-b{--depth:3px;z-index:1;color:#00f}
+.title-face{position:absolute;inset:.2em 0 .34em;z-index:4;color:#39ff14;-webkit-text-fill-color:#39ff14;-webkit-text-stroke:.028em #000;paint-order:stroke fill;pointer-events:none}
+.title-emojis{position:relative;z-index:6;display:flex;justify-content:center;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.15rem auto .8rem;font-size:clamp(1.35rem,3cqw,2.35rem);line-height:1}
+.title-emoji{position:static;display:inline-block;pointer-events:none;filter:drop-shadow(2px 2px 0 #000);animation:emojiOrbit 11s ease-in-out infinite alternate}
+.title-emoji.e2{animation-duration:13s}
+.title-emoji.e3{animation-duration:17s}
+.title-emoji.e4{animation-duration:19s}
 .sub{font-size:clamp(1.2rem,3vw,2rem);font-weight:900;background:#000;color:#fff;padding:.7rem 1rem;display:inline-block;max-width:100%;overflow-wrap:anywhere;transform:rotate(1.5deg);box-shadow:8px 8px 0 var(--tri-c);animation:blinkShadow 4s ease-in-out infinite}
 .stamp{position:relative;right:auto;top:auto;width:150px;height:150px;margin:.6rem auto .85rem;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--tri-b);border:7px dashed var(--tri-a);font-size:1.1rem;font-weight:900;transform:rotate(12deg);animation:spin 8s linear infinite}
 .pollinators{font-size:clamp(4.5rem,8vw,6.5rem);display:block;margin:.25rem auto .45rem;animation:float 2.2s ease-in-out infinite,spinTiny 7s linear infinite}
@@ -71,7 +71,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
  .emoji-run{padding-top:.35rem;padding-bottom:.35rem}
  .wrap{width:min(75ch,94vw);margin-top:3.45rem}
  .hero{padding:1.4rem .75rem 1.8rem;border-width:7px;border-radius:24px;box-shadow:10px 10px 0 #000,-7px -7px 0 #fff,0 0 30px var(--tri-a)}
- .hero h1{width:88%;line-height:.8;margin:.2rem auto 1.15rem}
+ .hero h1{width:90%;line-height:1.45;margin:.2rem auto .45rem}
  .sub{display:block;font-size:1rem;margin:.8rem auto 0;line-height:1.35;padding:.65rem .55rem;box-shadow:5px 5px 0 var(--tri-c)}
  .stamp{position:static;margin:.6rem auto;width:118px;height:118px;font-size:.9rem;border-width:5px}
  .pollinators{font-size:4rem;margin:.2rem auto .4rem}
@@ -108,11 +108,13 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 <span class="rgb-layer rgb-b"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 </span>
 <span class="title-face" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
-<span class="title-emoji e1" aria-hidden="true">🐝🌵✨</span>
-<span class="title-emoji e2" aria-hidden="true">🦋🌼🐝</span>
-<span class="title-emoji e3" aria-hidden="true">🌱🍄✨</span>
-<span class="title-emoji e4" aria-hidden="true">🌵🦋🌿</span>
 </h1>
+<div class="title-emojis" aria-hidden="true">
+<span class="title-emoji e1">🐝🌵✨</span>
+<span class="title-emoji e2">🦋🌼🐝</span>
+<span class="title-emoji e3">🌱🍄✨</span>
+<span class="title-emoji e4">🌵🦋🌿</span>
+</div>
 <div class="pollinators" aria-hidden="true">🐝🦋🌿</div>
 <div class="stamp">APPOINTMENT<br>BASED<br>🌱</div>
 <p class="sub">TEXAS NATIVE PLANTS • ECOLOGICALLY FRIENDLY • FAMILY RUN</p>
