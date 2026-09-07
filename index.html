@@ -7,6 +7,7 @@
 <title>The Cowhouse Nursery — Gatesville, Texas</title>
 <meta name="description" content="Appointment-based family plant nursery in Gatesville, Texas focused on Texas natives and ecologically friendly non-invasive plants for the Cross Timbers and Blackland Prairie.">
 <style>
+@font-face{font-family:"Florabet";src:url("./assets/florabet/Florabet-Cowhouse.woff2?v=2") format("woff2");font-style:normal;font-weight:400;font-display:block}
 
 :root{--ink:#111;--paper:#fffdf2}
 @property --h{syntax:"<number>";inherits:true;initial-value:348}
@@ -21,8 +22,7 @@ a{color:var(--tri-c);text-decoration-thickness:4px;text-decoration-style:wavy;fo
 a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .wrap{width:min(75ch,94vw);margin:4.25rem auto 3rem;position:relative;min-width:0}
 .hero{position:relative;overflow:hidden;container-type:inline-size;border:10px ridge var(--tri-a);border-radius:38px;background:radial-gradient(circle at 25% 20%,#fff 0 8%,var(--tri-b) 8% 28%,var(--tri-a) 28% 50%,var(--tri-c) 50% 72%,#fff 72%);padding:3rem 1.2rem 2.4rem;text-align:center;box-shadow:18px 18px 0 #000,-14px -14px 0 #fff,0 0 45px var(--tri-a);transform:rotate(-.4deg)}
-.hero h1{position:relative;width:84%;margin:.15rem auto 1.25rem;padding:.2em .08em .34em;font-family:"Florabet";font-size:clamp(2.1rem,12cqw,6.5rem);font-weight:400;font-synthesis:none;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite;visibility:hidden}
-.florabet-ready .hero h1{visibility:visible}
+.hero h1{position:relative;width:84%;margin:.15rem auto 1.25rem;padding:.2em .08em .34em;font-family:"Florabet";font-size:clamp(2.1rem,12cqw,6.5rem);font-weight:400;font-synthesis:none;font-style:normal;line-height:.78;text-transform:uppercase;letter-spacing:.005em;overflow:visible;isolation:isolate;transform-origin:50% 50%;animation:wobble 2.4s ease-in-out 3s infinite}
 .title-line{display:block;white-space:nowrap}
 .title-spacer{visibility:hidden}
 .title-stroke{position:absolute;inset:.2em 0 .34em;z-index:0;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:clamp(7px,.095em,14px) #000;pointer-events:none}
@@ -31,6 +31,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 .rgb-r{--depth:3px;z-index:3;color:#f00}
 .rgb-g{--depth:7px;z-index:2;color:#0f0}
 .rgb-b{--depth:11px;z-index:1;color:#00f}
+.title-face{position:absolute;inset:.2em 0 .34em;z-index:4;color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:.018em #000;paint-order:stroke fill;pointer-events:none}
 .title-emoji{position:absolute;z-index:5;font-size:clamp(1.8rem,4vw,3.8rem);line-height:1;pointer-events:none;filter:drop-shadow(2px 2px 0 #000);animation:emojiOrbit 11s ease-in-out infinite alternate}
 .title-emoji.e1{left:-.02em;top:-.25em}
 .title-emoji.e2{right:-.04em;top:-.28em;animation-duration:13s}
@@ -91,28 +92,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}.rgb-layer{transform:translateX(var(--depth))!important}.title-emoji{transform:none!important}}
 </style>
-<script src="./assets/florabet-runtime/chunk-0.js"></script>
-<script src="./assets/florabet-runtime/chunk-1.js"></script>
-<script src="./assets/florabet-runtime/chunk-2.js"></script>
-<script src="./assets/florabet-runtime/chunk-3.js"></script>
-<script src="./assets/florabet-runtime/chunk-4.js"></script>
-<script src="./assets/florabet-runtime/chunk-5.js"></script>
-<script src="./assets/florabet-runtime/chunk-6.js"></script>
-<script src="./assets/florabet-runtime/chunk-7.js"></script>
-<script src="./assets/florabet-runtime/chunk-8.js"></script>
-<script src="./assets/florabet-runtime/chunk-9.js"></script>
-<script>
-(()=>{
- const b64=window.__FLORABET_B64||"";
- if(b64.length!==65676)throw new Error(`Florabet payload length ${b64.length}`);
- const face=new FontFace("Florabet",`url(data:font/woff2;base64,${b64}) format("woff2")`,{style:"normal",weight:"400"});
- face.load().then(async loaded=>{
-   document.fonts.add(loaded);
-   await document.fonts.load('400 64px "Florabet"','COWHOUSE NURSERY');
-   document.documentElement.classList.add("florabet-ready");
- }).catch(err=>console.error("Florabet failed",err));
-})();
-</script>
+
 </head>
 <body>
 <div class="screen">
@@ -127,6 +107,7 @@ a:hover{color:var(--tri-a);text-shadow:3px 3px 0 #fff,-3px -3px 0 var(--tri-b)}
 <span class="rgb-layer rgb-g"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="rgb-layer rgb-b"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 </span>
+<span class="title-face" aria-hidden="true"><span class="title-line">COWHOUSE</span><span class="title-line">NURSERY</span></span>
 <span class="title-emoji e1" aria-hidden="true">🐝🌵✨</span>
 <span class="title-emoji e2" aria-hidden="true">🦋🌼🐝</span>
 <span class="title-emoji e3" aria-hidden="true">🌱🍄✨</span>
