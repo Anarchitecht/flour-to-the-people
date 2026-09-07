@@ -1,0 +1,57 @@
+name: Materialize Florabet
+
+on:
+  push:
+    branches:
+      - cowhouse-nursery-site
+    paths:
+      - .github/workflows/materialize-florabet.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build-font:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: cowhouse-nursery-site
+      - name: Reconstruct verified Florabet WOFF2
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, glob, hashlib, pathlib, re
+          parts=[]
+          def n(p):
+              return int(re.search(r'chunk-(\d+)\.js$', p).group(1))
+          for p in sorted(glob.glob('assets/florabet-runtime/chunk-*.js'), key=n):
+              text=pathlib.Path(p).read_text()
+              m=re.search(r'\+"([A-Za-z0-9+/=]+)";?\s*$', text)
+              if not m:
+                  raise SystemExit(f'Cannot parse {p}')
+              parts.append(m.group(1))
+          payload=''.join(parts)
+          if len(payload) != 65676:
+              raise SystemExit(f'Unexpected base64 length: {len(payload)}')
+          font=base64.b64decode(payload)
+          if font[:4] != b'wOF2':
+              raise SystemExit('Not a WOFF2 font')
+          digest=hashlib.sha256(font).hexdigest()
+          expected='1c867010590ad2eab8c1c853ac27fb14f00e596124a45ae199865362855496dd'
+          if digest != expected:
+              raise SystemExit(f'Wrong Florabet SHA256: {digest}')
+          out=pathlib.Path('assets/florabet/Florabet-Cowhouse.woff2')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_bytes(font)
+          print(f'wrote {len(font)} bytes sha256={digest}')
+          PY
+      - name: Commit real font file
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add assets/florabet/Florabet-Cowhouse.woff2
+          git diff --cached --quiet && exit 0
+          git commit -m "Materialize Florabet webfont"
+          git push origin HEAD:cowhouse-nursery-site
